@@ -1,16 +1,105 @@
-# React + Vite
+# Hanjala Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, animated personal portfolio built with React and Vite. It features a custom cursor, scroll-triggered section reveals, and a project showcase with modal details.
 
-Currently, two official plugins are available:
+## Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Animated hero with canvas particles and rotating titles
+- Scroll-triggered section reveals with background transitions
+- Filterable projects grid with modal view
+- Responsive layout with smooth navigation
 
-## React Compiler
+## Built With
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite 7
+- Framer Motion
+- React Icons
+- React Intersection Observer
 
-## Expanding the ESLint configuration
+## Sections
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Hero
+- About
+- Skills
+- Projects
+- Contact
+- Footer
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ (recommended)
+- npm
+
+### Install
+
+```bash
+npm install
+```
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Customization
+
+Update these components to change your content:
+
+- Hero text and titles: src/components/Hero/Hero.jsx
+- About content: src/components/About/About.jsx
+- Skills list: src/components/Skills/Skills.jsx
+- Project data: src/components/Projects/Projects.jsx
+- Contact details: src/components/Contact/Contact.jsx
+- Social links and branding: src/components/Navbar/Navbar.jsx
+- Footer content: src/components/Footer/Footer.jsx
+
+Styles live alongside each section in its matching CSS file under src/components.
+
+## Project Structure
+
+```text
+src/
+  App.jsx
+  main.jsx
+  index.css
+  components/
+    About/
+    Contact/
+    Cursor/
+    Footer/
+    Hero/
+    Navbar/
+    Projects/
+    Skills/
+```
+
+## Scripts
+
+- npm run dev: start the dev server
+- npm run build: create a production build
+- npm run preview: preview the production build
+- npm run lint: run ESLint
+
+## Deployment
+
+This project is ready to deploy on Vercel or any static hosting provider. Build with npm run build and deploy the dist/ folder.
+
+## License
+
+This project is provided as-is for personal portfolio use.
