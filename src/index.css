@@ -112,11 +112,11 @@ img {
 }
 
 .scroll-section .reveal-left {
-  transform: translate3d(-220px, 0, 0);
+  transform: translate3d(-1100px, 0, 0);
 }
 
 .scroll-section .reveal-right {
-  transform: translate3d(220px, 0, 0);
+  transform: translate3d(1100px, 0, 0);
 }
 
 .scroll-section.is-visible .reveal-item {
@@ -174,7 +174,7 @@ img {
 }
 
 .section-bg-6 {
-  --section-bg-color: #4F3793;
+  --section-bg-color: #4E5777;
   --section-text-color: #FFFFFF;
   --section-text-secondary: #E2E8F0;
   --section-text-muted: #CBD5F5;
@@ -312,3 +312,5 @@ img {
   }
 }
 
+
+/* index.css */

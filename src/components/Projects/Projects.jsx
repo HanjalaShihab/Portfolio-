@@ -112,42 +112,53 @@ const Projects = () => {
           ))}
         </motion.div>
 
-        <motion.div 
-          className="projects-grid reveal-item reveal-up"
-        >
-          <AnimatePresence>
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="project-card"
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                whileHover={{ transform: 'translateY(-12px)', boxShadow: '0 30px 60px rgba(0, 255, 136, 0.15)' }}
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="project-image">
-                  <img src={project.image} alt={project.title} />
-                  <div className="project-overlay">
-                    <div className="project-overlay-content">
-                      <span className="view-project">View Project</span>
-                    </div>
+        <div className="projects-grid">
+          {filteredProjects.map((project, index) => (
+            <div
+              key={project.id}
+              className={`project-card reveal-item ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+              onClick={() => setSelectedProject(project)}
+            >
+              <div className="project-image">
+                <img src={project.image} alt={project.title} />
+                <div className="project-overlay">
+                  <div className="project-overlay-content">
+                    <span className="view-project">View Project</span>
                   </div>
                 </div>
-                <div className="project-info">
+              </div>
+              <div className="project-info">
+                <div className="project-meta">
                   <span className="project-category">{project.category}</span>
-                  <h3 className="project-title">{project.title}</h3>
-                  <div className="project-tech">
-                    {project.tech.map((tech, i) => (
-                      <span key={i} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
+                  <span className="project-index">0{index + 1}</span>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+                <div className="project-tech">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  <a
+                    href={project.live}
+                    className="project-link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FiExternalLink /> Live
+                  </a>
+                  <a
+                    href={project.github}
+                    className="project-link outline"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FiGithub /> Code
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Project Modal */}

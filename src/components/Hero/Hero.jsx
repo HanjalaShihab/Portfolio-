@@ -3,22 +3,55 @@ import { motion } from 'framer-motion'
 import { FiArrowDown, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import './Hero.css'
 
+const titles = [
+  'Creative Developer & Designer',
+  'PHP Developer',
+  'Laravel Developer',
+  'React.Js Developer',
+  'AI Developer'
+]
+
 const Hero = () => {
   const canvasRef = useRef(null)
   const [typedText, setTypedText] = useState('')
-  const fullText = "Creative Developer & Designer"
-  
+
   useEffect(() => {
-    let index = 0
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index))
-        index++
+    let titleIndex = 0
+    let charIndex = 0
+    let isDeleting = false
+    let timeoutId
+
+    const tick = () => {
+      const currentTitle = titles[titleIndex]
+
+      if (!isDeleting) {
+        setTypedText(currentTitle.slice(0, charIndex + 1))
+        charIndex += 1
+
+        if (charIndex === currentTitle.length) {
+          isDeleting = true
+          timeoutId = setTimeout(tick, 1200)
+          return
+        }
       } else {
-        clearInterval(timer)
+        setTypedText(currentTitle.slice(0, charIndex - 1))
+        charIndex -= 1
+
+        if (charIndex === 0) {
+          isDeleting = false
+          titleIndex = (titleIndex + 1) % titles.length
+        }
       }
-    }, 80)
-    return () => clearInterval(timer)
+
+      const delay = isDeleting ? 40 : 80
+      timeoutId = setTimeout(tick, delay)
+    }
+
+    tick()
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   useEffect(() => {
