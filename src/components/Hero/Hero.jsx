@@ -263,10 +263,10 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://github.com/HanjalaShihab" target="_blank" rel="noopener noreferrer" className="social-link">
               <FiGithub />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://www.linkedin.com/in/h-m-shihab-a98039350/" target="_blank" rel="noopener noreferrer" className="social-link">
               <FiLinkedin />
             </a>
             <a href="mailto:shihab2305341402@diu.edu.bd" className="social-link">

@@ -105,10 +105,10 @@ const Navbar = () => {
               ))}
               
               <div className="mobile-social-links">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://github.com/HanjalaShihab" target="_blank" rel="noopener noreferrer" className="social-icon">
                   <FiGithub size={24} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://www.linkedin.com/in/h-m-shihab-a98039350/" target="_blank" rel="noopener noreferrer" className="social-icon">
                   <FiLinkedin size={24} />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-icon">

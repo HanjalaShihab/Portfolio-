@@ -4,7 +4,7 @@ import './Footer.css'
 
 const socialLinks = [
   { icon: FiGithub, href: 'https://github.com/HanjalaShihab', label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: FiLinkedin, href: 'https://www.linkedin.com/in/h-m-shihab-a98039350/', label: 'LinkedIn' },
   { icon: FiTwitter, href: 'https://twitter.com', label: 'Twitter' },
   { icon: FiMail, href: 'mailto:shihab2305341402@diu.edu.bd', label: 'Email' }
 ]
