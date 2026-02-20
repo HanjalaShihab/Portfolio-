@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { 
   FaReact, FaJs, FaHtml5, FaCss3, FaNodeJs, 
-  FaPython, FaGitAlt, FaGithub, FaBootstrap, FaPhp 
+  FaPython, FaGitAlt, FaGithub, FaBootstrap, FaPhp, FaChartLine 
 } from 'react-icons/fa'
 import { 
   SiExpress, SiTailwindcss, SiMongodb, SiMysql, SiLaravel
@@ -22,6 +22,7 @@ const skills = [
   { name: 'Bootstrap5', icon: FaBootstrap, level: 90, color: '#7952B3' },
   { name: 'Tailwind', icon: SiTailwindcss, level: 88, color: '#06B6D4' },
   { name: 'Python', icon: FaPython, level: 75, color: '#3776AB' },
+  { name: 'Data Analysis', icon: FaChartLine, level: 78, color: '#00D4AA' },
   { name: 'GitHub', icon: FaGithub, level: 92, color: '#181717' },
   { name: 'Git', icon: FaGitAlt, level: 90, color: '#F05032' },
   { name: 'HTML5', icon: FaHtml5, level: 98, color: '#E34F26' },
