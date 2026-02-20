@@ -1,27 +1,31 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { 
   FaReact, FaJs, FaHtml5, FaCss3, FaNodeJs, 
-  FaPython, FaFigma, FaGitAlt 
+  FaPython, FaGitAlt, FaGithub, FaBootstrap, FaPhp 
 } from 'react-icons/fa'
 import { 
-  SiTypescript, SiNextdotjs, SiTailwindcss, SiMongodb 
+  SiExpress, SiTailwindcss, SiMongodb, SiMysql, SiLaravel
 } from 'react-icons/si'
 import './Skills.css'
 
 const skills = [
   { name: 'React', icon: FaReact, level: 95, color: '#61DAFB' },
   { name: 'JavaScript', icon: FaJs, level: 92, color: '#F7DF1E' },
-  { name: 'TypeScript', icon: SiTypescript, level: 88, color: '#3178C6' },
-  { name: 'Next.js', icon: SiNextdotjs, level: 90, color: '#000000' },
+  { name: 'Node.js', icon: FaNodeJs, level: 88, color: '#339933' },
+  { name: 'Express.js', icon: SiExpress, level: 85, color: '#000000' },
+  { name: 'MongoDB', icon: SiMongodb, level: 85, color: '#47A248' },
+  { name: 'MySQL', icon: SiMysql, level: 80, color: '#4479A1' },
+  { name: 'PHP', icon: FaPhp, level: 85, color: '#777BB4' },
+  { name: 'Laravel', icon: SiLaravel, level: 80, color: '#FF2D20' },
+  { name: 'Bootstrap5', icon: FaBootstrap, level: 90, color: '#7952B3' },
+  { name: 'Tailwind', icon: SiTailwindcss, level: 88, color: '#06B6D4' },
+  { name: 'Python', icon: FaPython, level: 75, color: '#3776AB' },
+  { name: 'GitHub', icon: FaGithub, level: 92, color: '#181717' },
+  { name: 'Git', icon: FaGitAlt, level: 90, color: '#F05032' },
   { name: 'HTML5', icon: FaHtml5, level: 98, color: '#E34F26' },
   { name: 'CSS3', icon: FaCss3, level: 95, color: '#1572B6' },
-  { name: 'Tailwind', icon: SiTailwindcss, level: 94, color: '#06B6D4' },
-  { name: 'Node.js', icon: FaNodeJs, level: 85, color: '#339933' },
-  { name: 'Python', icon: FaPython, level: 80, color: '#3776AB' },
-  { name: 'MongoDB', icon: SiMongodb, level: 85, color: '#47A248' },
-  { name: 'Figma', icon: FaFigma, level: 90, color: '#F24E1E' },
-  { name: 'Git', icon: FaGitAlt, level: 94, color: '#F05032' },
 ]
 
 
@@ -73,12 +77,12 @@ const Skills = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <div className="stat-item-minimal">
-            <span className="stat-number">5+</span>
+            <span className="stat-number">4+</span>
             <span className="stat-label">Years</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat-item-minimal">
-            <span className="stat-number">50+</span>
+            <span className="stat-number">30+</span>
             <span className="stat-label">Projects</span>
           </div>
           <div className="stat-divider"></div>

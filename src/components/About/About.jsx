@@ -1,39 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import { FiArrowRight, FiDownload } from 'react-icons/fi'
 import shihab from '../../assets/shihab.jpg'
+import resume from '../../assets/hanjala_resume.pdf'
 import './About.css'
 
 const stats = [
-  { number: 5, suffix: '+', label: 'Years Experience' },
-  { number: 50, suffix: '+', label: 'Projects Completed' },
-  { number: 30, suffix: '+', label: 'Happy Clients' }
+  { number: 4, suffix: '+', label: 'Years Experience' },
+  { number: 30, suffix: '+', label: 'Projects Completed' },
+  //{ number: 30, suffix: '+', label: 'Happy Clients' }
 ]
 
 const About = () => {
   const [counters, setCounters] = useState(stats.map(() => 0))
   const statsRef = useRef(null)
   const [hasAnimated, setHasAnimated] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true)
-            animateCounters()
-          }
-        })
-      },
-      { threshold: 0.5 }
-    )
-
-    if (statsRef.current) {
-      observer.observe(statsRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [hasAnimated])
 
   const animateCounters = () => {
     stats.forEach((stat, index) => {
@@ -56,6 +38,26 @@ const About = () => {
       }, duration / steps)
     })
   }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true)
+            animateCounters()
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [hasAnimated])
 
   return (
     <section id="about" className="about section">
@@ -120,9 +122,9 @@ const About = () => {
               <motion.a href="#contact" className="btn btn-primary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 Hire Me <FiArrowRight />
               </motion.a>
-              <motion.button className="btn btn-outline" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.a href={resume} download="Hanjala_Shihab_Resume.pdf" className="btn btn-outline" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 Download CV <FiDownload />
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>

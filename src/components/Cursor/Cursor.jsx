@@ -4,7 +4,6 @@ import './Cursor.css'
 
 const Cursor = ({ mousePosition }) => {
   const [isHovering, setIsHovering] = useState(false)
-  const [trails, setTrails] = useState([])
 
   useEffect(() => {
     const handleMouseOver = (e) => {
@@ -21,18 +20,6 @@ const Cursor = ({ mousePosition }) => {
     document.addEventListener('mouseover', handleMouseOver)
     return () => document.removeEventListener('mouseover', handleMouseOver)
   }, [])
-
-  useEffect(() => {
-    if (mousePosition.x === 0 && mousePosition.y === 0) return
-    
-    setTrails(prev => {
-      const newTrails = [
-        ...prev,
-        { x: mousePosition.x, y: mousePosition.y, id: Date.now() }
-      ].slice(-8)
-      return newTrails
-    })
-  }, [mousePosition])
 
   return (
     <>
@@ -65,22 +52,6 @@ const Cursor = ({ mousePosition }) => {
           damping: 35
         }}
       />
-
-      {/* Trail Effects */}
-      {trails.map((trail, index) => (
-        <motion.div
-          key={trail.id}
-          className="cursor-trail"
-          initial={{ x: trail.x - 8, y: trail.y - 8, opacity: 0.6, scale: 1 }}
-          animate={{ 
-            x: trail.x - 8, 
-            y: trail.y - 8, 
-            opacity: 0,
-            scale: 0.3
-          }}
-          transition={{ duration: 0.5 }}
-        />
-      ))}
     </>
   )
 }

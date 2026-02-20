@@ -7,63 +7,83 @@ import './Projects.css'
 const projects = [
   {
     id: 1,
-    title: 'HANJALA Dashboard',
+    title: 'Adv Platform',
     category: 'web',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    description: 'A comprehensive analytics dashboard with real-time data visualization',
-    tech: ['React', 'D3.js', 'Node.js'],
-    live: '#',
-    github: '#'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    description: 'Full-stack advertising platform built with MERN stack',
+    tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    live: 'https://adv-one.vercel.app/',
+    github: 'https://github.com/HanjalaShihab/Adv'
   },
   {
     id: 2,
-    title: 'CryptoWallet App',
-    category: 'mobile',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80',
-    description: 'Secure cryptocurrency wallet with real-time trading features',
-    tech: ['React Native', 'Web3', 'TypeScript'],
-    live: '#',
-    github: '#'
+    title: "Mozammel's Gallery",
+    category: 'web',
+    image: 'https://images.unsplash.com/photo-1561998338-13ad7883b20f?w=800&q=80',
+    description: 'Interactive art gallery showcase with modern UI/UX',
+    tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    live: 'https://mozammels-gallery.netlify.app/',
+    github: 'https://github.com/HanjalaShihab/mozammels-gallery'
   },
   {
     id: 3,
-    title: 'Brand Identity System',
-    category: 'design',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
-    description: 'Complete brand identity design for a tech startup',
-    tech: ['Figma', 'Illustrator', 'Photoshop'],
-    live: '#',
-    github: '#'
+    title: 'Fun Portal',
+    category: 'web',
+    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
+    description: 'Entertainment portal with dynamic content and user interaction',
+    tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    live: 'https://fun-portal.vercel.app/',
+    github: 'https://github.com/HanjalaShihab/Fun-Portal'
   },
   {
     id: 4,
-    title: 'E-Commerce Platform',
+    title: 'Portfolio Website',
     category: 'web',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
-    description: 'Full-featured e-commerce solution with payment integration',
-    tech: ['Next.js', 'Stripe', 'MongoDB'],
-    live: '#',
-    github: '#'
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
+    description: 'Personal portfolio showcasing projects and skills',
+    tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    live: 'https://hanjala-shihab.vercel.app/',
+    github: 'https://github.com/HanjalaShihab/Portfolio-'
   },
   {
     id: 5,
-    title: 'Fitness Tracker',
-    category: 'mobile',
-    image: 'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=800&q=80',
-    description: 'Health and fitness tracking app with AI-powered insights',
-    tech: ['React Native', 'Firebase', 'TensorFlow'],
-    live: '#',
-    github: '#'
+    title: 'HustleHood BD',
+    category: 'web',
+    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80',
+    description: 'PHP-based community platform for hustlers and entrepreneurs',
+    tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+    live: 'https://hustlehood.gt.tc/',
+    github: 'https://github.com/HanjalaShihab/hustleHood_bd'
   },
   {
     id: 6,
-    title: 'Portfolio Template',
-    category: 'design',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
-    description: 'Minimalist portfolio template for creative professionals',
-    tech: ['Figma', 'Framer', 'React'],
-    live: '#',
-    github: '#'
+    title: "Muzammel's Gallery (PHP)",
+    category: 'web',
+    image: 'https://images.unsplash.com/photo-1513519107127-1bed33748e4c?w=800&q=80',
+    description: 'PHP-powered art gallery with dynamic content management',
+    tech: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
+    live: 'http://www.muzammelsgallery.wuaze.com',
+    github: 'https://github.com/HanjalaShihab/MozammelsGallery'
+  },
+  {
+    id: 7,
+    title: 'Hotel Unwind',
+    category: 'web',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+    description: 'Modern hotel website with elegant UI and smooth animations',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    live: 'https://hanjalashihab.github.io/Hotel-Unwind/',
+    github: 'https://github.com/HanjalaShihab/Hotel-Unwind'
+  },
+  {
+    id: 8,
+    title: 'Ogani',
+    category: 'web',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80',
+    description: 'Organic food e-commerce website with responsive design',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    live: 'https://hanjalashihab.github.io/Ogani/',
+    github: 'https://github.com/HanjalaShihab/Ogani'
   }
 ]
 
