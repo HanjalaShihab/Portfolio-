@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import './index.css'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
@@ -10,12 +10,31 @@ import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import Cursor from './components/Cursor/Cursor'
 
+const MOBILE_MEDIA_QUERY = '(max-width: 768px), (hover: none), (pointer: coarse)'
+
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isMobileDevice, setIsMobileDevice] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia(MOBILE_MEDIA_QUERY).matches
+  })
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY)
+    const handleMediaChange = (event) => {
+      setIsMobileDevice(event.matches)
+    }
+
+    setIsMobileDevice(mediaQuery.matches)
+    mediaQuery.addEventListener('change', handleMediaChange)
+
+    return () => mediaQuery.removeEventListener('change', handleMediaChange)
+  }, [])
 
   useEffect(() => {
     setIsLoaded(true)
+    if (isMobileDevice) return undefined
     
     let animationFrameId = null
     
@@ -33,7 +52,7 @@ function App() {
       window.removeEventListener('mousemove', handleMouseMove)
       if (animationFrameId) cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [isMobileDevice])
 
   // Scroll-triggered section reveal + background color transition (excluding hero)
   useEffect(() => {
@@ -44,6 +63,25 @@ function App() {
       { id: 'contact', colorClass: 'section-bg-4' },
       { id: 'footer', colorClass: 'section-bg-8' }
     ]
+
+    if (isMobileDevice) {
+      sectionConfig.forEach(({ id, colorClass }, index) => {
+        const element = document.getElementById(id)
+        if (!element) return
+
+        const directionClass = index % 2 === 0 ? 'scroll-section--left' : 'scroll-section--right'
+        element.classList.remove(
+          'section-bg',
+          'scroll-section',
+          'section-bg-active',
+          'is-visible',
+          colorClass,
+          directionClass
+        )
+      })
+
+      return undefined
+    }
 
     const sections = sectionConfig
       .map(({ id, colorClass }, index) => {
@@ -79,13 +117,18 @@ function App() {
 
     sections.forEach((section) => observer.observe(section))
 
-    return () => observer.disconnect()
-  }, [])
+    return () => {
+      observer.disconnect()
+      sections.forEach((section) => {
+        section.classList.remove('section-bg-active', 'is-visible')
+      })
+    }
+  }, [isMobileDevice])
 
   return (
     <AnimatePresence>
       <div className="app">
-        <Cursor mousePosition={mousePosition} />
+        {!isMobileDevice && <Cursor mousePosition={mousePosition} />}
         <Navbar />
         
         <main>

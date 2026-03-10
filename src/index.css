@@ -293,6 +293,10 @@ img {
   .section {
     padding: 60px 0;
   }
+
+  html {
+    scroll-behavior: auto;
+  }
   
   .section-title {
     font-size: 32px;
@@ -309,6 +313,25 @@ img {
   
   a, button {
     cursor: pointer;
+  }
+
+  .scroll-section,
+  .section-bg,
+  .scroll-section.section-bg.section-bg-active {
+    background: transparent;
+    color: inherit;
+  }
+
+  .scroll-section .reveal-item,
+  .scroll-section .reveal-up,
+  .scroll-section .reveal-down,
+  .scroll-section .reveal-left,
+  .scroll-section .reveal-right,
+  .scroll-section.is-visible .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0s;
   }
 }
 
