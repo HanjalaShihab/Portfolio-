@@ -15,11 +15,11 @@ Linear / Vercel / Stripe inspired — dark, minimal, premium, highly interactive
 - [x] 8. Create `CommandPalette` (⌘K terminal-style palette)
 - [x] 9. Rewrite `App.jsx` (mount FX, remove section-bg logic)
 - [x] 10. Rewrite `Navbar` (sticky glass, active section, scroll progress)
-- [ ] 11. Rewrite `Hero` (badge, typing roles, terminal window, stats, resume)
-- [ ] 12. Rewrite `About` (interactive timeline + photo + counters + focus/goals)
-- [ ] 13. Rewrite `Skills` (Developer Tech Dashboard — category panels + interactive chips)
-- [ ] 14. Rewrite `Projects` (Bento grid, filters, search, case-study modal)
-- [ ] 15. Rewrite `Contact` UI (backend/Formspree logic UNTOUCHED)
+- [x] 11. Rewrite `Hero` (badge, typing roles, terminal window, stats, resume)
+- [x] 12. Rewrite `About` (interactive timeline + photo + counters + focus/goals)
+- [x] 13. Rewrite `Skills` (Developer Tech Dashboard — category panels + interactive chips)
+- [x] 14. Rewrite `Projects` (Bento grid, filters, search, case-study modal)
+- [x] 15. Rewrite `Contact` UI (backend/Formspree logic UNTOUCHED)
 - [ ] 16. Rewrite `Footer` (premium dark footer)
 - [ ] 17. Update `Cursor` colors
 - [ ] 18. Build & verify (npm run build), fix lint issues
