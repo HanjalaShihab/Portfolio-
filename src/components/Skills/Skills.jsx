@@ -1,5 +1,4 @@
-import { useState } from 'react'
-// eslint-disable-next-line no-unused-vars
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   FaReact,
@@ -135,6 +134,85 @@ const skillCategories = [
 const favorites = ['Laravel', 'PHP', 'React', 'MySQL', 'Redis', 'REST APIs']
 const learning = ['Go (Golang)', 'Kubernetes', 'Advanced System Design', 'LLM Fine-tuning']
 
+const filters = [
+  { id: 'all', label: 'All' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'database', label: 'Database' },
+  { id: 'cloud', label: 'Cloud' },
+  { id: 'ai', label: 'AI' },
+  { id: 'tools', label: 'Tools' }
+]
+
+const filterToCategories = {
+  all: ['backend', 'frontend', 'database', 'tools', 'cloud', 'ai', 'devops'],
+  backend: ['backend'],
+  frontend: ['frontend'],
+  database: ['database'],
+  cloud: ['cloud', 'devops'],
+  ai: ['ai'],
+  tools: ['tools']
+}
+
+// Grid placement of each cluster inside the constellation canvas.
+// A structured 3-column grid guarantees every node stays inside the board
+// while clusters still read as a connected ecosystem.
+const clusterGrid = {
+  backend: { column: 1, row: 1 },
+  frontend: { column: 2, row: 1 },
+  database: { column: 3, row: 1 },
+  ai: { column: 1, row: 2 },
+  tools: { column: 2, row: 2 },
+  cloud: { column: 3, row: 2 },
+  devops: { column: 2, row: 3 }
+}
+
+// Directed graph of technology relationships (both directions render)
+const connections = [
+  ['Laravel', 'PHP'],
+  ['Laravel', 'MySQL'],
+  ['Laravel', 'Redis'],
+  ['Laravel', 'REST API Design'],
+  ['Laravel', 'Composer / NPM'],
+  ['PHP', 'MySQL'],
+  ['PHP', 'cPanel Hosting'],
+  ['REST API Design', 'Node.js'],
+  ['REST API Design', 'React'],
+  ['REST API Design', 'Postman'],
+  ['Node.js', 'Express.js'],
+  ['Node.js', 'JavaScript'],
+  ['Node.js', 'MongoDB'],
+  ['Express.js', 'MongoDB'],
+  ['React', 'JavaScript'],
+  ['React', 'Tailwind CSS'],
+  ['React', 'CSS3'],
+  ['React', 'Vercel'],
+  ['React', 'Firebase'],
+  ['JavaScript', 'HTML5'],
+  ['JavaScript', 'CSS3'],
+  ['Bootstrap 5', 'CSS3'],
+  ['HTML5', 'CSS3'],
+  ['MySQL', 'Database Design'],
+  ['MongoDB', 'Database Design'],
+  ['MySQL', 'cPanel Hosting'],
+  ['Python', 'OpenAI API'],
+  ['Python', 'Data Analysis'],
+  ['OpenAI API', 'AI Integration'],
+  ['OpenAI API', 'Chatbot Systems'],
+  ['AI Integration', 'Chatbot Systems'],
+  ['Docker', 'Linux'],
+  ['Docker', 'CI/CD'],
+  ['Docker', 'Composer / NPM'],
+  ['Docker', 'AWS Basics'],
+  ['Docker', 'GitHub'],
+  ['Git', 'GitHub'],
+  ['Git', 'Composer / NPM'],
+  ['GitHub', 'CI/CD'],
+  ['Vercel', 'CI/CD'],
+  ['Linux', 'Nginx / Apache'],
+  ['Linux', 'Monitoring']
+]
+
 const LevelBadge = ({ level }) => {
   const cls = {
     Expert: 'level--expert',
@@ -145,37 +223,50 @@ const LevelBadge = ({ level }) => {
   return <span className={`level-badge ${cls}`}>{level}</span>
 }
 
-const SkillChip = ({ skill, index }) => {
+const SkillNode = ({ skill, index, isActive, isConnected, isDimmed, onHover, onLeave, registerRef }) => {
   const [open, setOpen] = useState(false)
   const Icon = skill.icon
+  const stateClass = isActive ? ' is-active' : isConnected ? ' is-connected' : isDimmed ? ' is-dimmed' : ''
 
   return (
-    <div
-      className="skill-chip-wrap"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      style={{ '--skill-delay': `${index * 0.04}s`, '--chip-accent': skill.color }}
+    <motion.div
+      ref={(el) => registerRef(skill.name, el)}
+      className={`skill-node-wrap${stateClass}`}
+      style={{
+        '--chip-accent': skill.color,
+        '--float-duration': `${7 + (index % 5)}s`,
+        '--float-delay': `${-(index * 1.7)}s`
+      }}
+      initial={{ opacity: 0, scale: 0.85 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ delay: index * 0.05, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => { onHover(skill.name); setOpen(true) }}
+      onMouseLeave={() => { onLeave(); setOpen(false) }}
     >
-      <motion.button
-        className={`skill-chip ${open ? 'skill-chip--open' : ''}`}
-        whileHover={{ y: -4 }}
-        whileTap={{ scale: 0.96 }}
-        aria-expanded={open}
-        style={{ borderColor: `${skill.color}44` }}
-      >
-        <span className="skill-chip-icon" style={{ color: skill.color }}>
-          <Icon />
-        </span>
-        <span className="skill-chip-name">{skill.name}</span>
-      </motion.button>
+      <div className="skill-node-float">
+        <motion.button
+          className="skill-node"
+          whileHover={{ y: -3 }}
+          whileTap={{ scale: 0.95 }}
+          aria-expanded={open}
+          style={{ borderColor: `${skill.color}44` }}
+        >
+          <span className="skill-node-icon" style={{ color: skill.color }}><Icon /></span>
+          <span className="skill-node-name">{skill.name}</span>
+        </motion.button>
+      </div>
 
-      {/* Tooltip popover */}
-      {open && (
+      {/* ============================================================
+          Tooltip popover — PRESERVED but currently commented out.
+          Re-enable by uncommenting the block below.
+          ============================================================ */}
+      {/* {open && (
         <motion.div
           className="skill-pop"
-          initial={{ opacity: 0, y: 8, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 8, scale: 0.95 }}
+          initial={{ opacity: 0, y: 8, x: '-50%', scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
+          exit={{ opacity: 0, y: 8, x: '-50%', scale: 0.95 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="skill-pop-head">
@@ -192,12 +283,91 @@ const SkillChip = ({ skill, index }) => {
             <span><strong>{skill.projects}</strong> projects</span>
           </div>
         </motion.div>
-      )}
-    </div>
+      )} */}
+    </motion.div>
   )
 }
 
 const Skills = () => {
+  const [activeSkill, setActiveSkill] = useState(null)
+  const [filter, setFilter] = useState('all')
+  const [spot, setSpot] = useState({ x: 50, y: 50 })
+  const [lineData, setLineData] = useState([])
+  const constellationRef = useRef(null)
+  const nodeRefs = useRef({})
+
+  const connectedTo = useMemo(() => {
+    if (!activeSkill) return null
+    const set = new Set([activeSkill])
+    connections.forEach(([a, b]) => {
+      if (a === activeSkill) set.add(b)
+      if (b === activeSkill) set.add(a)
+    })
+    return set
+  }, [activeSkill])
+
+  const registerRef = useCallback((name, el) => {
+    if (el) nodeRefs.current[name] = el
+  }, [])
+
+  const measure = useCallback(() => {
+    const c = constellationRef.current
+    if (!c) return
+    const cRect = c.getBoundingClientRect()
+    const data = connections
+      .filter(([a, b]) => nodeRefs.current[a] && nodeRefs.current[b])
+      .map(([a, b]) => {
+        const ra = nodeRefs.current[a].getBoundingClientRect()
+        const rb = nodeRefs.current[b].getBoundingClientRect()
+        return {
+          id: `${a}__${b}`,
+          a,
+          b,
+          x1: ra.left + ra.width / 2 - cRect.left,
+          y1: ra.top + ra.height / 2 - cRect.top,
+          x2: rb.left + rb.width / 2 - cRect.left,
+          y2: rb.top + rb.height / 2 - cRect.top
+        }
+      })
+    setLineData(data)
+  }, [])
+
+  useEffect(() => {
+    const t = setTimeout(measure, 650)
+    window.addEventListener('resize', measure)
+
+    // Re-measure once the constellation actually scrolls into view,
+    // after the node entrance animations (scale 0.85 -> 1) complete.
+    let observer
+    if (constellationRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTimeout(measure, 700)
+            }
+          })
+        },
+        { threshold: 0.1 }
+      )
+      observer.observe(constellationRef.current)
+    }
+
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener('resize', measure)
+      if (observer) observer.disconnect()
+    }
+  }, [measure])
+
+  const handleSpot = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    setSpot({
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100
+    })
+  }
+
   return (
     <section id="skills" className="skills section">
       <div className="container">
@@ -208,99 +378,116 @@ const Skills = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="section-eyebrow">02 — Skills</span>
+          <span className="section-eyebrow">03 — Tech Ecosystem</span>
           <h2 className="section-title">
-            Developer <span className="text-gradient">Tech Dashboard</span>
+            Technology <span className="text-gradient">Ecosystem</span>
           </h2>
           <p className="section-subtitle">
-            Not a list of progress bars — a live map of the stack I use to build,
-            ship and scale products.
+            Hover any technology to explore my engineering stack. Every node is connected — each one
+            plays a role in how I build complete software systems.
           </p>
         </motion.div>
 
-        <div className="dashboard">
+        <motion.div
+          className="constellation-filters"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {filters.map((f) => (
+            <motion.button
+              key={f.id}
+              className={`filter-pill ${filter === f.id ? 'is-active' : ''}`}
+              onClick={() => setFilter(f.id)}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {f.label}
+            </motion.button>
+          ))}
+        </motion.div>
+
+        <div className="constellation" ref={constellationRef} onMouseMove={handleSpot}>
+          <div
+            className="constellation-spotlight"
+            style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+          />
+
+          <svg className="constellation-lines" aria-hidden="true">
+            {lineData.map((line) => {
+              const active = activeSkill && (line.a === activeSkill || line.b === activeSkill)
+              return (
+                <line
+                  key={line.id}
+                  className={`constellation-line${active ? ' is-active' : ''}`}
+                  x1={line.x1}
+                  y1={line.y1}
+                  x2={line.x2}
+                  y2={line.y2}
+                />
+              )
+            })}
+          </svg>
+
           {skillCategories.map((cat, ci) => {
-            const CatIcon = cat.icon
+            const grid = clusterGrid[cat.id] || { column: 1, row: 1 }
+            const hidden = filter !== 'all' && !filterToCategories[filter].includes(cat.id)
             return (
-              <motion.div
+              <div
                 key={cat.id}
-                className={`dash-card glass-card dash-card--${cat.layout}`}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.65, delay: (ci % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className={`constellation-cluster${hidden ? ' is-filtered' : ''}`}
+                style={{ gridColumn: grid.column, gridRow: grid.row, '--cluster-delay': `${ci * 0.08}s` }}
               >
-                <div className="dash-card-glow" style={{ background: `radial-gradient(circle, ${cat.accent}1f, transparent 70%)` }} />
-                <div className="dash-head">
-                  <span className="dash-icon" style={{ color: cat.accent, borderColor: `${cat.accent}44`, background: `${cat.accent}12` }}>
-                    <CatIcon />
-                  </span>
-                  <div>
-                    <h3 className="dash-title">{cat.title}</h3>
-                    <span className="dash-count">{cat.skills.length} technologies</span>
-                  </div>
+                <span className="cluster-label" style={{ color: cat.accent }}>{cat.title}</span>
+                <div className="cluster-nodes">
+                  {cat.skills.map((skill, si) => {
+                    const isActive = activeSkill === skill.name
+                    const isConnected = !!connectedTo && connectedTo.has(skill.name) && !isActive
+                    const isDimmed = !!activeSkill && connectedTo && !connectedTo.has(skill.name)
+                    return (
+                      <SkillNode
+                        key={skill.name}
+                        skill={skill}
+                        index={si}
+                        isActive={isActive}
+                        isConnected={isConnected}
+                        isDimmed={isDimmed}
+                        onHover={setActiveSkill}
+                        onLeave={() => setActiveSkill(null)}
+                        registerRef={registerRef}
+                      />
+                    )
+                  })}
                 </div>
-                <div className={`dash-chips dash-chips--${cat.layout}`}>
-                  {cat.skills.map((skill, si) => (
-                    <SkillChip key={skill.name} skill={skill} index={si} />
-                  ))}
-                </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>
 
         {/* Favorites & currently learning */}
-        <div className="skills-duo">
-          <motion.div
-            className="fav-card glass-card"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h4 className="fav-title">⭐ Favorite Stack</h4>
-            <div className="fav-chips">
-              {favorites.map((fav, i) => (
-                <motion.span
-                  key={fav}
-                  className="fav-chip"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  whileHover={{ y: -3, scale: 1.04 }}
-                >
+        <div className="skills-foot">
+          <div className="skills-foot-block">
+            <span className="skills-foot-label">⭐ Favorite Stack</span>
+            <div className="skills-foot-tags">
+              {favorites.map((fav) => (
+                <motion.span key={fav} className="foot-tag" whileHover={{ y: -3 }}>
                   {fav}
                 </motion.span>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="fav-card glass-card"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            <h4 className="fav-title">🌱 Currently Learning</h4>
-            <div className="fav-chips">
-              {learning.map((item, i) => (
-                <motion.span
-                  key={item}
-                  className="fav-chip fav-chip--learning"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  whileHover={{ y: -3, scale: 1.04 }}
-                >
+          <div className="skills-foot-block">
+            <span className="skills-foot-label">🌱 Currently Learning</span>
+            <div className="skills-foot-tags">
+              {learning.map((item) => (
+                <motion.span key={item} className="foot-tag foot-tag--learning" whileHover={{ y: -3 }}>
                   {item}
                 </motion.span>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

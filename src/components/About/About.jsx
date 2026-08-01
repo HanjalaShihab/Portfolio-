@@ -1,276 +1,171 @@
-import { useEffect, useRef, useState } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
-import {
-  FiArrowRight,
-  FiDownload,
-  FiMapPin,
-  FiTarget,
-  FiZap,
-  FiAward,
-  FiBriefcase,
-  FiBookOpen
-} from 'react-icons/fi'
-import { FaGraduationCap, FaCode, FaRocket } from 'react-icons/fa'
+import { FiArrowRight, FiDownload } from 'react-icons/fi'
 import shihab from '../../assets/shihab.jpg'
 import resume from '../../assets/hanjala_resume.pdf'
 import { staggerContainer, staggerItem, viewportOnce } from '../../utils/variants'
 import './About.css'
 
-const stats = [
-  { value: 4, suffix: '+', label: 'Years Experience' },
-  { value: 30, suffix: '+', label: 'Projects Completed' },
-  { value: 20, suffix: '+', label: 'Technologies Used' },
-  { value: 3, suffix: '', label: 'Core Frameworks' }
+const focusAreas = [
+  'Laravel',
+  'REST APIs',
+  'Backend Systems',
+  'AI Integration',
+  'Clean Architecture',
+  'System Design'
 ]
 
-const timeline = [
+const journey = [
   {
-    id: 'education',
-    icon: FaGraduationCap,
-    title: 'Education',
-    period: '2023 — Present',
-    description:
-      'Computer Science & Engineering student at Daffodil International University — where I turned curiosity into structured engineering practice.',
-    tags: ['CSE', 'Algorithms', 'Data Structures', 'DBMS']
+    year: '2023',
+    title: 'Started Computer Science & Engineering',
+    desc: 'at Daffodil International University — where curiosity turned into structured engineering practice.'
   },
   {
-    id: 'started',
-    icon: FaCode,
-    title: 'Started Programming',
-    period: 'Early Days',
-    description:
-      'Began with Python and problem-solving. Built a foundation in logic, control flow, and object-oriented thinking.',
-    tags: ['Python', 'Problem Solving', 'OOP']
+    year: '2023',
+    title: 'Discovered Python',
+    desc: 'Built a strong programming foundation through logic, problem solving, and object-oriented thinking.'
   },
   {
-    id: 'laravel',
-    icon: FiBriefcase,
-    title: 'Laravel & PHP',
-    period: 'Core Stack',
-    description:
-      'Deep-dived into Laravel and PHP — building RESTful APIs, auth systems, admin panels, and real-world database design.',
-    tags: ['Laravel', 'PHP', 'MySQL', 'REST API']
+    year: '2024',
+    title: 'Moved into Laravel & PHP',
+    desc: 'Built REST APIs, authentication systems, and database-driven applications.'
   },
   {
-    id: 'fullstack',
-    icon: FiZap,
-    title: 'Full Stack Engineering',
-    period: 'Now',
-    description:
-      'Combining Laravel backends with React frontends — shipping complete products: e-commerce, portals, dashboards and SaaS-style platforms.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Express']
+    year: '2025',
+    title: 'Expanded into Full Stack',
+    desc: 'React, Node.js, modern UI — real-world products from concept to deployment.'
   },
   {
-    id: 'ai',
-    icon: FaRocket,
-    title: 'AI-Powered Development',
-    period: 'Current Focus',
-    description:
-      'Integrating AI into practical applications — chatbots, content pipelines, and intelligent features on top of robust backends.',
-    tags: ['AI Integration', 'Chatbots', 'Automation']
+    year: 'Today',
+    title: 'Backend / Laravel Developer',
+    desc: 'Exploring scalable backend systems, AI integration, Docker, Redis, and cloud deployment.',
+    current: true
   }
 ]
 
-const currentFocus = [
-  { icon: FiTarget, label: 'Mastering Laravel architecture & API design' },
-  { icon: FiZap, label: 'Building production-grade full stack products' },
-  { icon: FaRocket, label: 'Exploring AI-powered backend features' },
-  { icon: FiBookOpen, label: 'Studying system design & scalability' }
-]
-
-const goals = [
-  { icon: FiBriefcase, label: 'Senior Backend Engineer' },
-  { icon: FiAward, label: 'Contribute to open-source Laravel packages' },
-  { icon: FaCode, label: 'Ship 10+ production applications' },
-  { icon: FiTarget, label: 'Lead backend teams & mentor juniors' }
-]
-
 const About = () => {
-  const [counters, setCounters] = useState(stats.map(() => 0))
-  const statsRef = useRef(null)
-  const [hasAnimated, setHasAnimated] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true)
-            const timers = stats.map((stat, index) => {
-              const duration = 1400
-              const steps = 55
-              const increment = stat.value / steps
-              let current = 0
-              return setInterval(() => {
-                current += increment
-                if (current >= stat.value) {
-                  current = stat.value
-                  clearInterval(timers[index])
-                }
-                setCounters((prev) => {
-                  const next = [...prev]
-                  next[index] = Math.floor(current)
-                  return next
-                })
-              }, duration / steps)
-            })
-            return timers
-          }
-        })
-      },
-      { threshold: 0.4 }
-    )
-
-    if (statsRef.current) observer.observe(statsRef.current)
-    return () => observer.disconnect()
-  }, [hasAnimated])
-
   return (
     <section id="about" className="about section">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewportOnce}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="section-eyebrow">01 — About</span>
-          <h2 className="section-title">
-            Engineering, <span className="text-gradient">end to end</span>
-          </h2>
-          <p className="section-subtitle">
-            The journey from first lines of code to shipping full stack products —
-            and where I'm headed next.
-          </p>
-        </motion.div>
-
-        <div className="about-layout">
-          {/* Left: profile + stats */}
+        <div className="about-editorial">
+          {/* ============ LEFT — Editorial intro ============ */}
           <motion.div
-            className="about-profile-col"
+            className="about-intro"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
           >
-            <motion.div className="about-profile-card glass-card" variants={staggerItem}>
-              <div className="about-image-wrap">
-                <div className="about-image-glow" />
-                <div className="about-image">
-                  <img src={shihab} alt="Portrait of Hanjala Shihab" loading="lazy" />
-                </div>
-              </div>
-              <div className="about-profile-info">
-                <h3 className="about-name">Hanjala Shihab</h3>
-                <p className="about-role">Backend · Laravel · Full Stack</p>
-                <div className="about-location">
-                  <FiMapPin size={14} /> Dhaka, Bangladesh
-                </div>
-              </div>
-              <div className="about-cta">
-                <a href="#contact" className="btn btn-primary">
-                  Hire Me <FiArrowRight />
-                </a>
-                <a href={resume} download="Hanjala_Shihab_Resume.pdf" className="btn btn-outline">
-                  <FiDownload /> Resume
-                </a>
+            <motion.span className="about-eyebrow" variants={staggerItem}>
+              About
+            </motion.span>
+
+            <div className="about-title-block">
+              <motion.h2 className="about-heading" variants={staggerItem}>
+                My <span className="text-gradient">Journey</span>
+              </motion.h2>
+              <motion.p className="about-statement" variants={staggerItem}>
+                Building software
+                <br />
+                that solves
+                <br />
+                real-world problems.
+              </motion.p>
+            </div>
+
+            <motion.div className="about-portrait" variants={staggerItem} aria-hidden="true">
+              <div className="about-portrait-ring" />
+              <div className="about-portrait-img">
+                <img src={shihab} alt="Portrait of Hanjala Shihab" loading="lazy" />
               </div>
             </motion.div>
 
-            <motion.div className="about-stats" ref={statsRef} variants={staggerItem}>
-              {stats.map((stat, i) => (
-                <div key={stat.label} className="about-stat">
-                  <span className="about-stat-value">
-                    {counters[i]}
-                    {stat.suffix}
-                  </span>
-                  <span className="about-stat-label">{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
+            <motion.p className="about-bio" variants={staggerItem}>
+              I'm Hanjala Shihab — a backend-focused software engineer who turns ideas into
+              reliable, scalable products. I care about clean architecture, thoughtful APIs,
+              and software that feels effortless to use and easy to maintain.
+            </motion.p>
 
-          {/* Right: timeline */}
-          <div className="about-timeline-col">
-            <motion.div
-              className="timeline"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              {timeline.map((item, idx) => {
-                const Icon = item.icon
-                return (
-                  <motion.div
-                    key={item.id}
-                    className="timeline-item"
-                    variants={staggerItem}
-                    custom={idx}
+            <motion.div className="about-focus" variants={staggerItem}>
+              <span className="about-focus-label">Current Focus</span>
+              <div className="about-focus-tags">
+                {focusAreas.map((tag, i) => (
+                  <motion.span
+                    key={tag}
+                    className="about-focus-tag"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ y: -3 }}
                   >
-                    <div className="timeline-marker">
-                      <span className="timeline-icon"><Icon /></span>
-                      <span className="timeline-line" />
-                    </div>
-                    <div className="timeline-card glass-card">
-                      <div className="timeline-head">
-                        <h4 className="timeline-title">{item.title}</h4>
-                        <span className="timeline-period">{item.period}</span>
-                      </div>
-                      <p className="timeline-desc">{item.description}</p>
-                      <div className="timeline-tags">
-                        {item.tags.map((tag) => (
-                          <span key={tag} className="chip">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+                    {tag}
+                  </motion.span>
+                ))}
+              </div>
             </motion.div>
-          </div>
+
+            <motion.div className="about-actions" variants={staggerItem}>
+              <a href="#contact" className="about-link about-link--primary">
+                Get in touch
+              </a>
+              <a href={resume} download="Hanjala_Shihab_Resume.pdf" className="about-link download-link">
+                <FiDownload /> Resume
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* ============ RIGHT — Editorial journey ============ */}
+          <motion.div
+            className="about-journey"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
+            {journey.map((item, idx) => (
+              <motion.div
+                key={`${item.year}-${item.title}`}
+                className={`journey-row ${item.current ? 'journey-row--current' : ''}`}
+                variants={staggerItem}
+                custom={idx}
+              >
+                <div className="journey-rail">
+                  <motion.span
+                    className="journey-dot"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                  {idx < journey.length - 1 && (
+                    <motion.span
+                      className="journey-line"
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true, amount: 0.4 }}
+                      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  )}
+                </div>
+                <div className="journey-content">
+                  <motion.span
+                    className="journey-year"
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {item.year}
+                  </motion.span>
+                  <h4 className="journey-title">{item.title}</h4>
+                  <p className="journey-desc">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-
-        {/* Focus & Goals */}
-        <motion.div
-          className="about-duo"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer}
-        >
-          <motion.div className="focus-card glass-card" variants={staggerItem}>
-            <div className="duo-head">
-              <span className="duo-icon"><FiZap /></span>
-              <h3>Current Focus</h3>
-            </div>
-            <ul className="duo-list">
-              {currentFocus.map((f) => (
-                <li key={f.label}>
-                  <f.icon size={15} className="duo-list-icon" />
-                  {f.label}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div className="focus-card glass-card" variants={staggerItem}>
-            <div className="duo-head">
-              <span className="duo-icon duo-icon--alt"><FiTarget /></span>
-              <h3>Goals</h3>
-            </div>
-            <ul className="duo-list">
-              {goals.map((g) => (
-                <li key={g.label}>
-                  <g.icon size={15} className="duo-list-icon duo-list-icon--alt" />
-                  {g.label}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   )

@@ -105,7 +105,7 @@ const Contact = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="section-eyebrow">04 — Contact</span>
+          <span className="section-eyebrow">05 — Contact</span>
           <h2 className="section-title">
             Let's build <span className="text-gradient">something great</span>
           </h2>

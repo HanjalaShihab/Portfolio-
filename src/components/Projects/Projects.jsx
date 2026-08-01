@@ -538,7 +538,7 @@ const Projects = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="section-eyebrow">03 — Projects</span>
+          <span className="section-eyebrow">04 — Projects</span>
           <h2 className="section-title">
             Case Studies &amp; <span className="text-gradient">Builds</span>
           </h2>
@@ -654,7 +654,7 @@ const Projects = () => {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="row-link"
+                    className="row-link live-link-row"
                   >
                     Live Demo <FiArrowRight className="row-link-arrow" />
                   </a>
