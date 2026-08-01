@@ -110,3 +110,52 @@ const CommandPalette = () => {
               <FiSearch size={20} />
               <input
                 autoFocus
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Type a command… (about, projects, resume)"
+                aria-label="Search commands"
+              />
+              <FiTerminal size={18} style={{ color: 'var(--accent-secondary)', opacity: 0.7 }} />
+            </div>
+
+            <div className="cmd-list" role="listbox">
+              {results.length === 0 && (
+                <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
+                  No matching commands.
+                </div>
+              )}
+              {results.map((cmd, idx) => {
+                const Icon = cmd.icon
+                return (
+                  <button
+                    key={cmd.id}
+                    className={`cmd-item ${idx === activeIndex ? 'cmd-item--active' : ''}`}
+                    onClick={() => runCommand(cmd)}
+                    onMouseEnter={() => setActiveIndex(idx)}
+                    role="option"
+                    aria-selected={idx === activeIndex}
+                  >
+                    <Icon />
+                    <span>{cmd.label}</span>
+                    {idx === activeIndex && <FiArrowRight className="cmd-shortcut" />}
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className="cmd-footer">
+              <span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span>
+              <span><kbd>↵</kbd> select</span>
+              <span><kbd>esc</kbd> close</span>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+export default CommandPalette
+
