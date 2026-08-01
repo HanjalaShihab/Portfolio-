@@ -6,8 +6,8 @@ import {
   FiGithub,
   FiX,
   FiSearch,
-  FiBookOpen,
-  FiFilter
+  FiFilter,
+  FiArrowRight
 } from 'react-icons/fi'
 import './Projects.css'
 
@@ -178,12 +178,6 @@ const filters = [
   'Open Source'
 ]
 
-const sizeClass = {
-  featured: 'bento-featured',
-  medium: 'bento-medium',
-  small: 'bento-small'
-}
-
 const complexityColor = {
   High: 'complexity--high',
   Medium: 'complexity--medium',
@@ -194,6 +188,15 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All')
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(null)
+
+  const handleRowMove = (e) => {
+    const row = e.currentTarget
+    const rect = row.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
+    row.style.setProperty('--spot-x', `${x}%`)
+    row.style.setProperty('--spot-y', `${y}%`)
+  }
 
   const filtered = useMemo(() => {
     let list = projects
@@ -264,110 +267,113 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/* Bento grid */}
-        <motion.div layout className="bento-grid">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, index) => {
-              return (
-                <motion.article
-                  key={project.id}
-                  layout
-                  className={`bento-card ${sizeClass[project.size]}`}
-                  initial={{ opacity: 0, y: 40, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.03 }}
-                  onClick={() => setSelected(project)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      setSelected(project)
-                    }
-                  }}
-                  aria-label={`Open case study for ${project.title}`}
-                >
-                  <div className="browser-mock">
-                    <div className="browser-bar">
-                      <span className="browser-dot browser-dot--r" />
-                      <span className="browser-dot browser-dot--y" />
-                      <span className="browser-dot browser-dot--g" />
-                      <span className="browser-url">{project.live.replace('https://', '')}</span>
-                    </div>
-                    <div className="browser-body">
-                      <img src={project.image} alt={`${project.title} preview`} loading="lazy" />
-                      <div className="browser-overlay" />
-                    </div>
-                  </div>
-
-                  <div className="bento-content">
-                    <div className="bento-meta">
-                      <span className="bento-year">{project.year}</span>
-                      <span className={`complexity ${complexityColor[project.complexity]}`}>
-                        {project.complexity} complexity
-                      </span>
-                    </div>
-                    <h3 className="bento-title">{project.title}</h3>
-                    <p className="bento-desc">{project.description}</p>
-
-                    <div className="bento-features">
-                      {project.features.slice(0, 4).map((f) => (
-                        <span key={f} className="feature-chip">{f}</span>
-                      ))}
-                      {project.features.length > 4 && (
-                        <span className="feature-chip feature-chip--more">+{project.features.length - 4}</span>
-                      )}
-                    </div>
-
-                    <div className="bento-tech">
-                      {project.tech.map((t) => (
-                        <span key={t} className="tech-tag">{t}</span>
-                      ))}
-                    </div>
-
-                    <div className="bento-actions">
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bento-action bento-action--primary"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FiExternalLink /> Live
-                      </a>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bento-action"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FiGithub /> Code
-                      </a>
-                      <button
-                        className="bento-action bento-action--study"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setSelected(project)
-                        }}
-                      >
-                        <FiBookOpen /> Case Study
-                      </button>
-                    </div>
-                  </div>
-                </motion.article>
-              )
-            })}
-          </AnimatePresence>
-        </motion.div>
-
-        {filtered.length === 0 && (
+{filtered.length === 0 && (
           <div className="projects-empty">
             <FiSearch size={28} />
             <p>No projects match “{search}” under <strong>{activeFilter}</strong>.</p>
           </div>
         )}
+      </div>
+
+      {/* Editorial showcase — full-width (outside container) */}
+      <div className="editorial-list">
+        {filtered.map((project, index) => (
+          <div key={project.id} className="editorial-row-wrap">
+            {index > 0 && <div className="row-divider" />}
+            <motion.article
+              className={`editorial-row ${index % 2 === 1 ? 'editorial-row--reverse' : ''}`}
+              onMouseMove={handleRowMove}
+              initial={{ opacity: 0, y: 48, x: index % 2 === 1 ? -28 : 28 }}
+              whileInView={{ opacity: 1, y: 0, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.05 * (index % 3) }}
+            >
+              <div className="row-spotlight" aria-hidden="true" />
+
+              {/* Text column */}
+              <div className="row-content">
+                <div className="row-meta">
+                  <span className="row-index">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="row-meta-line" aria-hidden="true" />
+                  <span className="row-year">{project.year}</span>
+                  <span className={`complexity ${complexityColor[project.complexity]}`}>
+                    {project.complexity}
+                  </span>
+                </div>
+
+                <h3 className="row-title">{project.title}</h3>
+                <p className="row-desc">{project.description}</p>
+
+                <div className="row-features-block">
+                  <span className="row-label">Engineering Features</span>
+                  <div className="row-features">
+                    {project.features.slice(0, 5).map((f, idx) => (
+                      <span key={f} className="feature-pill" style={{ '--i': idx }}>{f}</span>
+                    ))}
+                    {project.features.length > 5 && (
+                      <span className="feature-pill feature-pill--more">+{project.features.length - 5}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="row-tech" aria-label="Tech stack">
+                  {project.tech.map((t, i) => (
+                    <span key={t} className="tech-item">
+                      {i > 0 && <span className="tech-sep" aria-hidden="true">•</span>}
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="row-links">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="row-link"
+                  >
+                    GitHub <FiArrowRight className="row-link-arrow" />
+                  </a>
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="row-link"
+                  >
+                    Live Demo <FiArrowRight className="row-link-arrow" />
+                  </a>
+                  <button
+                    className="row-link row-link--study"
+                    onClick={() => setSelected(project)}
+                  >
+                    Case Study <FiArrowRight className="row-link-arrow" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Browser preview */}
+              <div className="row-preview">
+                <div className="browser-frame">
+                  <div className="browser-topbar">
+                    <span className="browser-dot browser-dot--r" />
+                    <span className="browser-dot browser-dot--y" />
+                    <span className="browser-dot browser-dot--g" />
+                    <span className="browser-url">
+                      {project.live.replace('https://', '').replace('http://', '')}
+                    </span>
+                  </div>
+                  <div className="browser-screen">
+                    <img
+                      src={project.image}
+                      alt={`${project.title} preview`}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+            </motion.article>
+          </div>
+        ))}
       </div>
 
       {/* Case Study Modal */}
@@ -405,7 +411,7 @@ const Projects = () => {
                     <span className="browser-dot browser-dot--r" />
                     <span className="browser-dot browser-dot--y" />
                     <span className="browser-dot browser-dot--g" />
-                    <span className="browser-url">{selected.live.replace('https://', '')}</span>
+                    <span className="browser-url">{selected.live.replace('https://', '').replace('http://', '')}</span>
                   </div>
                   <div className="study-browser-body">
                     <img src={selected.image} alt={`${selected.title} preview`} />
@@ -422,10 +428,10 @@ const Projects = () => {
                   <p className="study-desc">{selected.description}</p>
                   <div className="study-actions">
                     <a href={selected.live} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                      <FiExternalLink /> Live Demo
+                      <FiExternalLink size={15} /> Live Demo
                     </a>
                     <a href={selected.github} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-                      <FiGithub /> View Code
+                      <FiGithub size={15} /> Source Code
                     </a>
                   </div>
                 </div>
@@ -449,34 +455,22 @@ const Projects = () => {
                     <h4>Challenges</h4>
                     <p>{selected.challenges}</p>
                   </div>
-                </div>
-
-                <div className="study-section">
-                  <h4>Key Engineering Features</h4>
-                  <div className="study-features">
-                    {selected.features.map((f) => (
-                      <span key={f} className="feature-chip feature-chip--lg">{f}</span>
-                    ))}
+                  <div className="study-section study-section--wide">
+                    <h4>Engineering Features</h4>
+                    <div className="study-features">
+                      {selected.features.map((f) => (
+                        <span key={f} className="feature-chip feature-chip--lg">{f}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                <div className="study-section">
-                  <h4>Tech Stack</h4>
-                  <div className="study-tech">
-                    {selected.tech.map((t) => (
-                      <span key={t} className="tech-tag tech-tag--lg">{t}</span>
-                    ))}
+                  <div className="study-section study-section--wide">
+                    <h4>Tech Stack</h4>
+                    <div className="study-tech">
+                      {selected.tech.map((t) => (
+                        <span key={t} className="tech-tag tech-tag--lg">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                <div className="study-section">
-                  <h4>Future Improvements</h4>
-                  <ul className="study-future">
-                    <li>Add realtime notifications &amp; WebSocket updates</li>
-                    <li>Implement queue-based background jobs for heavy tasks</li>
-                    <li>Introduce Redis caching for high-traffic endpoints</li>
-                    <li>Expand test coverage with unit &amp; integration tests</li>
-                  </ul>
                 </div>
               </div>
             </motion.div>
