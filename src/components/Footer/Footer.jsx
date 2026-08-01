@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiArrowUp } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiArrowUp, FiHeart, FiTerminal } from 'react-icons/fi'
 import './Footer.css'
 
 const socialLinks = [
@@ -17,43 +17,64 @@ const Footer = () => {
   return (
     <footer id="footer" className="footer">
       <div className="container">
-        <div className="footer-content">
-          <motion.div className="footer-brand reveal-item reveal-left">
-            <a href="#home" className="footer-logo">
-              <span className="logo-text">HANJALA</span>
-              <span className="logo-dot">.</span>
+        <motion.div
+          className="footer-content"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="footer-brand">
+            <a href="#home" className="footer-logo" aria-label="Go to home">
+              <span className="footer-logo-mark">{'</>'}</span>
+              <span className="footer-logo-text">hanjala</span>
+              <span className="footer-logo-dot">_</span>
             </a>
-            <p>Creating extraordinary digital experiences</p>
-          </motion.div>
+            <p className="footer-tagline">
+              Backend / Laravel / Full Stack engineer crafting robust digital products.
+            </p>
+          </div>
 
-          <motion.div className="footer-social reveal-item reveal-right">
-            {socialLinks.map((social, index) => (
+          <div className="footer-social">
+            {socialLinks.map((social) => (
               <motion.a
-                key={index}
+                key={social.label}
                 href={social.href}
                 className="footer-social-link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                whileHover={{ scale: 1.15, y: -5 }}
+                whileHover={{ scale: 1.12, y: -5 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <social.icon size={20} />
+                <social.icon size={18} />
               </motion.a>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
-        <motion.div className="footer-bottom reveal-item reveal-up">
-              <p>{new Date().getFullYear()}. Made with ❤️ by Hanjala</p>
-          <motion.button 
+        <motion.div
+          className="footer-bottom"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          <p className="footer-copy">
+            © {new Date().getFullYear()} Hanjala Shihab. Crafted with{' '}
+            <FiHeart size={13} className="footer-heart" /> &amp; Laravel-grade discipline.
+          </p>
+          <p className="footer-term">
+            <FiTerminal size={13} /> <span className="term-text">press ⌘K anytime</span>
+          </p>
+          <motion.button
             className="back-to-top"
             onClick={scrollToTop}
-            whileHover={{ scale: 1.15, y: -5 }}
+            whileHover={{ scale: 1.12, y: -5 }}
             whileTap={{ scale: 0.85 }}
             aria-label="Back to top"
           >
-            <FiArrowUp size={20} />
+            <FiArrowUp size={18} />
           </motion.button>
         </motion.div>
       </div>

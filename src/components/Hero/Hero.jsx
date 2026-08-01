@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import {
   FiArrowDown,
@@ -65,8 +66,10 @@ const Hero = () => {
       if (typed.length > 0) {
         timeout = setTimeout(() => setTyped(current.slice(0, typed.length - 1)), 28)
       } else {
-        setIsDeleting(false)
-        setRoleIndex((prev) => (prev + 1) % roles.length)
+        timeout = setTimeout(() => {
+          setIsDeleting(false)
+          setRoleIndex((prev) => (prev + 1) % roles.length)
+        }, 160)
       }
     }
 
@@ -108,7 +111,7 @@ const Hero = () => {
                 <span className="hero-tech-focus">
                   <span className="tech-focus-label">Currently building with</span>
                   <span className="tech-focus-icons">
-                    {techFocus.map((t, i) => (
+                    {techFocus.map((t) => (
                       <span
                         key={t.name}
                         className="tech-focus-icon"

@@ -20,7 +20,7 @@ Linear / Vercel / Stripe inspired — dark, minimal, premium, highly interactive
 - [x] 13. Rewrite `Skills` (Developer Tech Dashboard — category panels + interactive chips)
 - [x] 14. Rewrite `Projects` (Bento grid, filters, search, case-study modal)
 - [x] 15. Rewrite `Contact` UI (backend/Formspree logic UNTOUCHED)
-- [ ] 16. Rewrite `Footer` (premium dark footer)
-- [ ] 17. Update `Cursor` colors
+- [x] 16. Rewrite `Footer` (premium dark footer)
+- [x] 17. Update `Cursor` colors
 - [ ] 18. Build & verify (npm run build), fix lint issues
 

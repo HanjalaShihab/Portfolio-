@@ -1,42 +1,50 @@
 .cursor {
   position: fixed;
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--accent-primary);
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid rgba(139, 92, 246, 0.85);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: difference;
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  mix-blend-mode: screen;
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.35);
+  transition: background 0.25s, border-color 0.25s;
 }
 
 .cursor.hovering {
-  border-color: var(--accent-secondary);
-  box-shadow: 0 0 30px rgba(255, 0, 110, 0.7);
+  border-color: rgba(34, 211, 238, 0.9);
+  background: rgba(34, 211, 238, 0.08);
+  box-shadow: 0 0 26px rgba(34, 211, 238, 0.5);
 }
 
 .cursor-dot {
   position: fixed;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   background: var(--accent-primary);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 10px var(--accent-primary);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.7);
 }
 
 .cursor-trail {
   position: fixed;
   width: 16px;
   height: 16px;
-  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
 }
 
 @media (max-width: 768px) {
+  .cursor, .cursor-dot, .cursor-trail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .cursor, .cursor-dot, .cursor-trail {
     display: none;
   }
