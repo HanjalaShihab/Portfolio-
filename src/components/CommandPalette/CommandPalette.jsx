@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Suspense, lazy, useEffect, useMemo, useState } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -35,6 +35,13 @@ import AskAssistant from '../EasterEggs/AskAssistant'
 import RetroMode from '../EasterEggs/RetroMode'
 import Confetti from '../EasterEggs/Confetti'
 import SecretToast from '../EasterEggs/SecretToast'
+
+/* ---------------- Lazy-loaded Phase 2 experiences (code-split) ---------------- */
+const Office = lazy(() => import('../EasterEggs/Office'))
+const PortfolioOS = lazy(() => import('../EasterEggs/PortfolioOS'))
+const Timeline = lazy(() => import('../EasterEggs/Timeline'))
+const World = lazy(() => import('../EasterEggs/World'))
+const Space = lazy(() => import('../EasterEggs/Space'))
 
 /* ---------------- Existing commands (UNCHANGED) ---------------- */
 const commands = [
@@ -88,7 +95,7 @@ const CommandPalette = () => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   /* --- Hidden layer state --- */
-  const [mode, setMode] = useState(null) // null | 'terminal' | 'matrix' | 'cat' | 'achievements' | 'ask' | 'retro' | 'toast' | 'hire'
+  const [mode, setMode] = useState(null) // null | 'terminal' | 'matrix' | 'cat' | 'achievements' | 'ask' | 'retro' | 'toast' | 'hire' | 'office' | 'portfolioos' | 'timeline' | 'world' | 'space'
   const [toast, setToast] = useState(null) // { title, text }
   const [confetti, setConfetti] = useState(false)
   const [hireStep, setHireStep] = useState(0)
@@ -273,6 +280,36 @@ const CommandPalette = () => {
           setToast({ title: 'developer', text: 'Command not found.' })
         }
         break
+      case 'office':
+        setMode('office')
+        setOpen(false)
+        setQuery('')
+        AchievementStore.unlock('office')
+        break
+      case 'portfolioos':
+        setMode('portfolioos')
+        setOpen(false)
+        setQuery('')
+        AchievementStore.unlock('portfolioos')
+        break
+      case 'timeline':
+        setMode('timeline')
+        setOpen(false)
+        setQuery('')
+        AchievementStore.unlock('timeline')
+        break
+      case 'world':
+        setMode('world')
+        setOpen(false)
+        setQuery('')
+        AchievementStore.unlock('world')
+        break
+      case 'space':
+        setMode('space')
+        setOpen(false)
+        setQuery('')
+        AchievementStore.unlock('space')
+        break
       default:
         break
     }
@@ -305,6 +342,31 @@ const CommandPalette = () => {
       {/* Overlay globals from secret modes — rendered at body level via portal-ish wrapper */}
       {mode === 'matrix' && <MatrixMode onDone={() => { setMode(null); setQuery('') }} />}
       {mode === 'cat' && <PixelCat onDone={() => { setMode(null); setQuery('') }} />}
+      {mode === 'office' && (
+        <Suspense fallback={null}>
+          <Office onExit={() => { setMode(null); setQuery('') }} />
+        </Suspense>
+      )}
+      {mode === 'portfolioos' && (
+        <Suspense fallback={null}>
+          <PortfolioOS onExit={() => { setMode(null); setQuery('') }} />
+        </Suspense>
+      )}
+      {mode === 'timeline' && (
+        <Suspense fallback={null}>
+          <Timeline onExit={() => { setMode(null); setQuery('') }} />
+        </Suspense>
+      )}
+      {mode === 'world' && (
+        <Suspense fallback={null}>
+          <World onExit={() => { setMode(null); setQuery('') }} />
+        </Suspense>
+      )}
+      {mode === 'space' && (
+        <Suspense fallback={null}>
+          <Space onExit={() => { setMode(null); setQuery('') }} />
+        </Suspense>
+      )}
       {retroActive && <RetroMode onExit={() => setRetroActive(false)} />}
       {confetti && <Confetti onDone={() => setConfetti(false)} />}
 

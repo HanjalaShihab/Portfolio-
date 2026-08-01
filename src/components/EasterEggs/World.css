@@ -1,0 +1,466 @@
+/* ============================================================
+   World — Developer World ocean map
+   ============================================================ */
+
+.world-mode {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: linear-gradient(180deg, #0e2f4e 0%, #15678f 45%, #1d9dbd 100%);
+}
+
+[data-theme='light'] .world-mode {
+  background: linear-gradient(180deg, #2f7fb3 0%, #58b4d6 45%, #8ce0ea 100%);
+}
+
+/* ---- Ocean waves ---- */
+.world-ocean {
+  position: absolute;
+  inset: 0;
+}
+
+.world-waves {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -10%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 26px,
+    rgba(255, 255, 255, 0.05) 26px,
+    rgba(255, 255, 255, 0.05) 28px
+  );
+  animation: worldWave 14s linear infinite;
+}
+
+.world-waves--2 {
+  bottom: -18%;
+  animation-duration: 20s;
+  opacity: 0.7;
+}
+
+.world-waves--3 {
+  bottom: -26%;
+  animation-duration: 28s;
+  opacity: 0.5;
+}
+
+@keyframes worldWave {
+  from { transform: translateY(0); }
+  to { transform: translateY(30px); }
+}
+
+/* ---- Map container ---- */
+.world-map {
+  position: absolute;
+  inset: 0;
+}
+
+.world-route {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.world-route-line {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  opacity: 0.6;
+}
+
+/* ---- Sailing ship ---- */
+.world-ship {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  font-size: 44px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.4));
+  animation: worldShipBob 1s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes worldShipBob {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-3deg); }
+  50% { transform: translate(-50%, -54%) rotate(3deg); }
+}
+
+/* ---- Islands ---- */
+.world-island {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  width: 130px;
+}
+
+.world-island-emoji {
+  font-size: 46px;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.world-island:hover .world-island-emoji {
+  transform: translateY(-6px) scale(1.12);
+}
+
+.world-island-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.world-island-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.28);
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.world-island-ripple {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  width: 60px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transform: translateX(-50%);
+  animation: worldRipple 3s ease-out infinite;
+}
+
+@keyframes worldRipple {
+  0% { opacity: 0.7; transform: translateX(-50%) scale(0.6); }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.6); }
+}
+
+/* ---- Compass ---- */
+.world-compass {
+  position: absolute;
+  bottom: 70px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.85;
+}
+
+.world-compass-rose {
+  font-size: 34px;
+  animation: worldCompass 8s ease-in-out infinite;
+}
+
+@keyframes worldCompass {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(14deg); }
+}
+
+.world-compass-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---- Header ---- */
+.world-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 30px clamp(24px, 4vw, 56px);
+  pointer-events: none;
+}
+
+.world-header > * {
+  pointer-events: auto;
+}
+
+.world-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a5e6f5;
+  display: block;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.world-title {
+  font-size: clamp(26px, 3.6vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+  margin-bottom: 8px;
+}
+
+.world-sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  max-width: 440px;
+  line-height: 1.6;
+}
+
+.world-exit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.world-exit:hover {
+  background: rgba(248, 113, 113, 0.4);
+  border-color: #f87171;
+}
+
+/* ---- Island detail overlay ---- */
+.world-island-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: rgba(5, 20, 40, 0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.world-island-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.world-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.world-card-emoji {
+  font-size: 40px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.world-card-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.world-card-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-secondary);
+}
+
+.world-card-summary {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.world-card-section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.world-card-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.world-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.world-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--accent-secondary);
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+}
+
+.world-card-text {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.world-card-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.world-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.world-btn--primary {
+  background: var(--gradient-main);
+  color: #0b0b11;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+}
+
+.world-btn--primary:hover {
+  transform: translateY(-2px);
+}
+
+.world-btn--ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+}
+
+.world-btn--ghost:hover {
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.world-card-close {
+  margin-top: 6px;
+  padding: 9px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.world-card-close:hover {
+  color: var(--accent-secondary);
+  border-color: var(--glass-border-hover);
+}
+
+/* ---- Legend ---- */
+.world-legend {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  max-width: 94vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .world-header {
+    padding: 20px 18px;
+  }
+  .world-island {
+    width: 96px;
+  }
+  .world-island-emoji {
+    font-size: 34px;
+  }
+  .world-island-name {
+    font-size: 11px;
+  }
+  .world-island-tag {
+    display: none;
+  }
+  .world-compass {
+    bottom: 60px;
+    right: 20px;
+  }
+  .world-compass-rose {
+    font-size: 26px;
+  }
+  .world-title {
+    font-size: 24px;
+  }
+  .world-sub {
+    font-size: 12.5px;
+  }
+  .world-legend {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world-waves,
+  .world-ship,
+  .world-island-ripple,
+  .world-compass-rose {
+    animation: none !important;
+  }
+}
+

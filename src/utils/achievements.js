@@ -15,7 +15,12 @@ export const ACHIEVEMENTS = [
   { id: 'matrix', label: 'Matrix Hacker', emoji: '🏆' },
   { id: 'cat', label: 'Cat Friend', emoji: '🏆' },
   { id: 'resume', label: 'Downloaded Resume', emoji: '🏆' },
-  { id: 'github', label: 'Visited GitHub', emoji: '🏆' }
+  { id: 'github', label: 'Visited GitHub', emoji: '🏆' },
+  { id: 'office', label: 'Explored the Office', emoji: '🏢' },
+  { id: 'portfolioos', label: 'Booted Portfolio OS', emoji: '🖥️' },
+  { id: 'timeline', label: 'Traveled the Timeline', emoji: '🕰️' },
+  { id: 'world', label: 'Sailed the World', emoji: '🗺️' },
+  { id: 'space', label: 'Reached for the Stars', emoji: '🌌' }
 ]
 
 export const MASTER_ACHIEVEMENT = { id: 'master', label: 'Secret Master', emoji: '🏆' }

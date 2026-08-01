@@ -1,41 +1,27 @@
-# Portfolio — Light / Night Mode + Secret Easter Egg Layer
+# Portfolio — Phase 2 Hidden Experiences
 
-## Light / Night Mode
-- [x] Analyze all components + CSS design tokens (index.css, all section CSS)
-- [x] Plan approved by user
-- [x] Create `src/context/ThemeContext.jsx` — theme state, localStorage persistence, system-preference default, `data-theme` attribute on `<html>`, theme-color meta sync
-- [x] Create `src/components/ThemeToggle/ThemeToggle.jsx` + `ThemeToggle.css` — animated sun/moon navbar button
-- [x] Wrap app in `ThemeProvider` in `src/main.jsx`
-- [x] Add toggle button to Navbar (`src/components/Navbar/Navbar.jsx`)
-- [x] Add "Toggle Light/Night Mode" command to CommandPalette (`src/components/CommandPalette/CommandPalette.jsx`)
-- [x] Add light-theme token overrides + new surface variables in `src/index.css`
-- [x] Update `Navbar.css` — glass navbar, mobile menu, kbd surfaces for light mode
-- [x] Update `Hero.css` — terminal framing, tech-focus icons for light mode
-- [x] Update `Projects.css` — mockups, dividers, modal surfaces for light mode
-- [x] Update `Contact.css` — terminal framing, form borders for light mode
-- [x] Update `Skills.css` — constellation board, popover for light mode
-- [x] Update `Cursor.css` — multiply blend in light mode
-- [x] Update `BackgroundFX.jsx` — adjust orb/grid intensity for light mode
-- [x] Verify `npm run build` compiles cleanly
+## Scope
+- Add 5 new hidden experiences: `office`, `portfolioos`, `timeline`, `world`, `space`
+- `count users` is SKIPPED (per user instruction — leave for later)
+- Do NOT modify existing UI, layout, animations, sections, navigation, or normal command palette behavior
 
-## Secret Easter Egg Layer (Command Palette)
-- [x] `src/utils/secretCommands.js` — secret command registry (exact-match only), quotes/fortunes/jokes/knowledge base
-- [x] `src/utils/achievements.js` — localStorage-backed achievements (9 achievements, persistent)
-- [x] `src/components/CommandPalette/TerminalView.jsx` — embedded Linux-style terminal (help/about/skills/projects/resume/contact/github/linkedin/pwd/ls/whoami/history/neofetch/cat about.md/cat resume.txt/clear/exit)
-- [x] `src/components/EasterEggs/MatrixMode.jsx` — ~10s Matrix digital rain + green accents, auto-restore
-- [x] `src/components/EasterEggs/PixelCat.jsx` — walking pixel cat with speech bubbles, disappears after crossing
-- [x] `src/components/EasterEggs/AchievementsPanel.jsx` — achievements panel with locked (dimmed) + unlocked display
-- [x] `src/components/EasterEggs/AskAssistant.jsx` — local keyword-based portfolio Q&A (no external AI)
-- [x] `src/components/EasterEggs/RetroMode.jsx` — CRT overlay + pixel font + retro sound + badge (Konami code)
-- [x] `src/components/EasterEggs/Confetti.jsx` — lightweight CSS confetti burst
-- [x] `src/components/EasterEggs/SecretToast.jsx` — toast output with optional connect buttons
-- [x] `src/components/CommandPalette/SecretLayer.css` — theme-aware styles for all secret layers
-- [x] `src/components/CommandPalette/CommandPalette.jsx` — secret detection (exact-match only, never leaks to search), mode routing, Konami listener, achievement triggers, retro body class
-- [x] Verify `npm run build` compiles cleanly (✓ 470 modules, 4.23s)
+## Steps
+- [x] Analyze existing secret layer (secretCommands registry, achievements, CommandPalette modes, Easter egg components)
+- [x] Plan approved (scope reduced: no `count users`)
+- [x] Add 5 new exact-match secret commands + data pools to `src/utils/secretCommands.js`
+- [x] Add 5 new achievements to `src/utils/achievements.js`
+- [x] Create `src/components/EasterEggs/Office.jsx` + `Office.css` — pixel-art workspace with clickable objects
+- [x] Create `src/components/EasterEggs/PortfolioOS.jsx` + `PortfolioOS.css` — boot sequence + draggable-window desktop OS
+- [x] Create `src/components/EasterEggs/Timeline.jsx` + `Timeline.css` — horizontal career journey with expandable cards
+- [x] Create `src/components/EasterEggs/World.jsx` + `World.css` — fictional Developer World map with project islands
+- [x] Create `src/components/EasterEggs/Space.jsx` + `Space.css` — full-screen galaxy (planets/stars/constellations)
+- [x] Add lazy imports + mode routing + achievement unlocks in `src/components/CommandPalette/CommandPalette.jsx`
+- [x] Document the 5 new commands in `README.md` (bottom)
+- [x] Verify `npm run build` compiles cleanly (code-split chunks: Office/PortfolioOS/Timeline/World/Space)
 
-## Accepted behaviors
-- Secrets ONLY fire on exact full command match — never appear in results/suggestions/autocomplete
-- Existing palette commands, keyboard nav, and UI unchanged
-- Achievements persist in localStorage; unlocked only through genuine actions
-- All Easter egg layers theme-aware, accessible (aria labels), responsive, gracefully degrade
+## Build result
+- ✓ 481 modules transformed, built in 4.78s
+- Code-split chunks: Office (9.19kB JS / 10.43kB CSS), PortfolioOS (9.73kB / 7.86kB), Timeline (3.44kB / 4.85kB), World (4.67kB / 6.83kB), Space (5.19kB / 5.91kB)
+- Main bundle: index 473.29kB (gzip 152.10kB) — experiences load on demand only
+</content>
 
