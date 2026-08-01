@@ -15,3 +15,25 @@ interactions, Framer Motion scroll reveals. Keep all data/logic/links unchanged.
 - [x] 7. Lint & fix (`npm run lint`)
 - [x] 8. Compress vertical spacing (~450-550px per project), add cursor-following spotlight, final polish
 
+---
+
+# Contact Section Redesign — Premium Terminal Experience
+
+## Task
+Redesign ONLY the Contact section. Frontend only. Do NOT touch backend:
+form submission logic, Formspree endpoint, fetch request, validation, field names,
+success/error logic, environment variables, email integration — all preserved.
+
+## Design
+Modern developer terminal (Warp / Ghostty / VS Code integrated) — premium, minimal,
+NOT a hacker terminal. Terminal window with contact.sh header, $ commands, terminal-style
+form, ./send-message button, social links as commands, sign-off.
+
+## Steps
+- [x] 1. Read current Contact files
+- [x] 2. Design plan approved by user
+- [ ] 3. Rewrite `src/components/Contact/Contact.jsx` (terminal UI, keep Formspree logic)
+- [ ] 4. Rewrite `src/components/Contact/Contact.css` (terminal styles)
+- [ ] 5. Build & verify (`npm run build`)
+- [ ] 6. Lint & fix (`npm run lint`)
+

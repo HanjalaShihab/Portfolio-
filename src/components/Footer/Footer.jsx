@@ -62,8 +62,7 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           <p className="footer-copy">
-            © {new Date().getFullYear()} Hanjala Shihab. Crafted with{' '}
-            <FiHeart size={13} className="footer-heart" /> &amp; Laravel-grade discipline.
+            © {new Date().getFullYear()}. Made with <FiHeart size={13} className="footer-heart" /> by Hanjala Shihab.
           </p>
           <p className="footer-term">
             <FiTerminal size={13} /> <span className="term-text">press ⌘K anytime</span>
