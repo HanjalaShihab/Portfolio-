@@ -57,29 +57,29 @@ The command palette (press **⌘K** or click the ⌘K button in the navbar) cont
 
 Open the palette and type one of these exact commands:
 
-| Command             | What it does                                                                                                                                          |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `space`             | 🌌 Transforms the portfolio into a galaxy — projects become planets, skills become stars, and you can fly between them                                |
-| `world`             | 🗺️ Explore **Developer World** — a fictional ocean map where every project is its own island                                                         |
-| `timeline`          | 🕰️ Interactive career timeline with expandable milestones, technologies, challenges, and lessons learned                                             |
-| `portfolioos`       | 🖥️ Boots **Portfolio OS** — a hidden desktop operating system with draggable windows, apps, and a built-in terminal                                  |
-| `office`            | 🏢 Enter a pixel-art developer workspace — interact with the laptop, monitor, coffee mug, bookshelf, whiteboard, plant, desk drawer, window, and door |
-| `terminal`          | Opens an embedded Linux terminal (`hanjala@portfolio:~$`) — type `help` to see available commands                                                     |
-| `matrix`            | Plays the Matrix digital-rain effect for ~10 seconds before automatically restoring the portfolio                                                     |
-| `cat`               | A pixel cat strolls across the bottom of the screen with random speech bubbles                                                                        |
-| `quote`             | Displays a random programming quote                                                                                                                   |
-| `fortune`           | Reveals a random developer fortune                                                                                                                    |
-| `joke`              | Shows a random programming joke                                                                                                                       |
-| `coffee`            | Serves a coffee-themed developer joke                                                                                                                 |
-| `hello`             | Displays a friendly greeting                                                                                                                          |
-| `42`                | The answer to life, the universe, and everything                                                                                                      |
-| `make me rich`      | Attempts to... but probably won't 😄                                                                                                                  |
-| `achievements`      | Opens your achievements panel (progress is stored locally)                                                                                            |
-| `ask`               | Launches a local AI assistant that answers questions about the portfolio                                                                              |
-| `sudo hire hanjala` | Runs a playful hiring simulation complete with a subtle confetti celebration                                                                          |
-| `rm -rf /`          | Permission denied 😉                                                                                                                                  |
-| `konami`            | Activates Retro Mode (CRT overlay, pixel font, retro sound). Also works with the classic Konami code: ↑ ↑ ↓ ↓ ← → ← → B A                             |
-| `developer`         | Unlocks a hidden thank-you message after **every achievement** has been earned                                                                        |
+| Command             | 
+| ------------------- |
+| `space`             | 
+| `world`             |
+| `timeline`          | 
+| `portfolioos`       |
+| `office`            |
+| `terminal`          |
+| `matrix`            | 
+| `cat`               |
+| `quote`             |
+| `fortune`           | 
+| `joke`              | 
+| `coffee`            |
+| `hello`             | 
+| `42`                | 
+| `make me rich`      | 
+| `achievements`      |
+| `ask`               | 
+| `sudo hire hanjala` |
+| `rm -rf /`          | 
+| `konami`            | 
+| `developer`         |
 
 ### Terminal commands
 
