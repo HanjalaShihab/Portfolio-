@@ -22,5 +22,6 @@ Linear / Vercel / Stripe inspired — dark, minimal, premium, highly interactive
 - [x] 15. Rewrite `Contact` UI (backend/Formspree logic UNTOUCHED)
 - [x] 16. Rewrite `Footer` (premium dark footer)
 - [x] 17. Update `Cursor` colors
+- [x] 17b. Fix cursor lag — refactored to `useMotionValue` + `useSpring` driven directly by mousemove (no React state round-trip)
 - [x] 18. Build & verify (npm run build), fix lint issues
 
