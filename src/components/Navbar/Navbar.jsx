@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiGithub, FiLinkedin, FiCommand } from 'react-icons/fi'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import './Navbar.css'
 
 const navLinks = [
@@ -112,6 +113,8 @@ const Navbar = () => {
           </div>
 
           <div className="nav-actions">
+            <ThemeToggle />
+
             <motion.button
               className="palette-trigger"
               onClick={openPalette}

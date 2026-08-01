@@ -64,10 +64,8 @@
   position: relative;
   min-height: 780px;
   border-radius: 28px;
-  background:
-    radial-gradient(ellipse 60% 42% at 50% 0%, rgba(139, 92, 246, 0.05), transparent 70%),
-    rgba(255, 255, 255, 0.012);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--constellation-bg);
+  border: 1px solid var(--constellation-border);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -90,7 +88,7 @@
   height: 480px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.07), transparent 60%);
+  background: radial-gradient(circle, var(--spotlight-soft), transparent 60%);
   transform: translate(-50%, -50%);
   transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1), top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
@@ -205,7 +203,7 @@
 
 .skill-node-wrap.is-active .skill-node {
   border-color: var(--chip-accent);
-  background: rgba(255, 255, 255, 0.09);
+  background: var(--surface-soft-hover);
   box-shadow: 0 0 0 2px var(--chip-accent), 0 0 40px rgba(139, 92, 246, 0.5);
 }
 
@@ -224,7 +222,7 @@
   gap: 9px;
   padding: 9px 15px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface-soft);
   border: 1px solid var(--glass-border);
   color: var(--text-secondary);
   font-size: 13.5px;
@@ -235,7 +233,7 @@
 }
 
 .skill-node:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--surface-soft-hover);
   color: var(--text-primary);
 }
 
@@ -263,10 +261,10 @@
   width: 250px;
   max-width: calc(100vw - 32px);
   padding: 18px;
-  background: rgba(20, 20, 29, 0.97);
+  background: var(--popover-bg);
   border: 1px solid var(--glass-border);
   border-radius: 14px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-lift);
   z-index: 50;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -297,7 +295,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface-soft);
   font-size: 19px;
 }
 
@@ -437,7 +435,7 @@
     grid-template-rows: auto;
     gap: 10px 16px;
     padding: 28px 20px;
-    background: rgba(255, 255, 255, 0.014);
+    background: var(--constellation-bg-mobile);
   }
 
   .constellation-lines,
@@ -451,7 +449,7 @@
     align-items: flex-start;
     gap: 12px;
     padding: 18px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--constellation-border);
     transition: opacity 0.4s, transform 0.4s;
   }
 

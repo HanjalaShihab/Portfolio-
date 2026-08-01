@@ -44,6 +44,19 @@
   z-index: 9998;
 }
 
+/* Light mode — `screen` blend is invisible on light surfaces, use `multiply` */
+[data-theme='light'] .cursor {
+  mix-blend-mode: multiply;
+  border-color: rgba(99, 102, 241, 0.75);
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.28);
+}
+
+[data-theme='light'] .cursor.hovering {
+  border-color: rgba(8, 145, 178, 0.85);
+  background: rgba(34, 211, 238, 0.14);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.4);
+}
+
 @media (max-width: 768px) {
   .cursor, .cursor-dot, .cursor-trail {
     display: none;

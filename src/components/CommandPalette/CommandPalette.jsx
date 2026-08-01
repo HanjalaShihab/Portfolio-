@@ -12,9 +12,11 @@ import {
   FiLinkedin,
   FiDownload,
   FiArrowRight,
-  FiTerminal
+  FiTerminal,
+  FiSun
 } from 'react-icons/fi'
 import resume from '../../assets/hanjala_resume.pdf'
+import { useTheme } from '../../context/ThemeContext'
 
 const commands = [
   { id: 'home', label: 'Go to Home', section: '#home', icon: FiHome },
@@ -22,6 +24,7 @@ const commands = [
   { id: 'skills', label: 'Go to Skills', section: '#skills', icon: FiGrid },
   { id: 'projects', label: 'Go to Projects', section: '#projects', icon: FiFolder },
   { id: 'contact', label: 'Go to Contact', section: '#contact', icon: FiMail },
+  { id: 'toggle-theme', label: 'Toggle Light / Night Mode', action: 'toggle-theme', icon: FiSun },
   { id: 'github', label: 'Open GitHub', href: 'https://github.com/HanjalaShihab', icon: FiGithub },
   { id: 'linkedin', label: 'Open LinkedIn', href: 'https://www.linkedin.com/in/h-m-shihab-a98039350/', icon: FiLinkedin },
   { id: 'resume', label: 'Download Resume', href: resume, download: true, icon: FiDownload },
@@ -33,6 +36,7 @@ const navigate = (href) => {
 }
 
 const CommandPalette = () => {
+  const { toggleTheme } = useTheme()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
@@ -63,7 +67,9 @@ const CommandPalette = () => {
   }
 
   const runCommand = (cmd) => {
-    if (cmd.action === 'copy') {
+    if (cmd.action === 'toggle-theme') {
+      toggleTheme()
+    } else if (cmd.action === 'copy') {
       navigator.clipboard.writeText('shihab2305341402@diu.edu.bd')
     } else if (cmd.href) {
       window.open(cmd.href, cmd.download ? '_self' : '_blank', 'noopener,noreferrer')
