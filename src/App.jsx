@@ -27,7 +27,6 @@ function App() {
       setIsMobileDevice(event.matches)
     }
 
-    setIsMobileDevice(mediaQuery.matches)
     mediaQuery.addEventListener('change', handleMediaChange)
 
     return () => mediaQuery.removeEventListener('change', handleMediaChange)

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiArrowUp, FiHeart, FiTerminal } from 'react-icons/fi'
 import './Footer.css'

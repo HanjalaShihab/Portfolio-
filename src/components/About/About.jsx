@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import {
   FiArrowRight,
@@ -13,7 +14,7 @@ import {
 import { FaGraduationCap, FaCode, FaRocket } from 'react-icons/fa'
 import shihab from '../../assets/shihab.jpg'
 import resume from '../../assets/hanjala_resume.pdf'
-import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../../utils/variants'
+import { staggerContainer, staggerItem, viewportOnce } from '../../utils/variants'
 import './About.css'
 
 const stats = [

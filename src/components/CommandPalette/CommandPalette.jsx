@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   FiSearch,
@@ -56,9 +57,10 @@ const CommandPalette = () => {
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
-  useEffect(() => {
+  const handleQueryChange = (e) => {
+    setQuery(e.target.value)
     setActiveIndex(0)
-  }, [query])
+  }
 
   const runCommand = (cmd) => {
     if (cmd.action === 'copy') {
@@ -112,7 +114,7 @@ const CommandPalette = () => {
                 autoFocus
                 type="text"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={handleQueryChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Type a command… (about, projects, resume)"
                 aria-label="Search commands"

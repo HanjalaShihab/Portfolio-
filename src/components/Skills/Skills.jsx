@@ -1,4 +1,5 @@
 import { useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import {
   FaReact,
@@ -144,7 +145,7 @@ const LevelBadge = ({ level }) => {
   return <span className={`level-badge ${cls}`}>{level}</span>
 }
 
-const SkillChip = ({ skill, index, accent }) => {
+const SkillChip = ({ skill, index }) => {
   const [open, setOpen] = useState(false)
   const Icon = skill.icon
 
@@ -241,7 +242,7 @@ const Skills = () => {
                 </div>
                 <div className={`dash-chips dash-chips--${cat.layout}`}>
                   {cat.skills.map((skill, si) => (
-                    <SkillChip key={skill.name} skill={skill} index={si} accent={cat.accent} />
+                    <SkillChip key={skill.name} skill={skill} index={si} />
                   ))}
                 </div>
               </motion.div>
