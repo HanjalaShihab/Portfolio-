@@ -16,6 +16,44 @@ import './Projects.css'
    ============================================================ */
 const projects = [
   {
+    id: 10,
+    title: 'Adalot Sathi',
+    size: 'featured',
+    category: ['fullstack', 'mobile', 'laravel', 'flutter', 'php'],
+    filters: ['Laravel', 'Full Stack', 'Backend'],
+    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80',
+    description: 'Legal Case Deadline Manager for Bangladesh — a mobile app for lawyers and small law firms that centralizes every case and its deadlines, sending multi-stage reminders (push + SMS) so no deadline is ever missed.',
+    problem: 'Lawyers in Bangladesh juggle dozens of cases across courts, each with critical filing and hearing deadlines. Missing one can cost a client the case.',
+    solution: 'Built Adalot Sathi, a mobile-first app that centralizes every case and its deadlines in one place and sends multi-stage reminders via push notification and SMS.',
+    architecture: 'Laravel 12 REST API (Sanctum auth, MySQL for production) powering a Flutter app (Android-first, iOS later). Backend handles case CRUD, deadline scheduling and reminder dispatch.',
+    challenges: 'Accurate reminder scheduling across multiple stages, reliable SMS delivery, and a fast, dependable offline-first mobile experience for busy legal professionals.',
+    features: ['REST API', 'Authentication', 'Push Notifications', 'SMS Reminders', 'Deadline Tracking', 'Case Management'],
+    tech: ['Flutter', 'Laravel', 'MySQL', 'Sanctum', 'SMS'],
+    live: '#',
+    github: 'https://github.com/HanjalaShihab/Adalot_Sathi',
+    complexity: 'High',
+    year: '2026'
+  },
+  {
+    id: 11,
+    title: 'EduFlow',
+    size: 'featured',
+    category: ['fullstack', 'web', 'ai', 'laravel', 'react', 'python'],
+    filters: ['Full Stack', 'AI', 'Backend'],
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80',
+    description: 'A production-ready, cloud-based multi-tenant SaaS for educational institutions. Its first product is an AI-assisted attendance system combining face recognition, liveness detection and keyword-based verification.',
+    problem: 'Schools, colleges and universities needed secure, tamper-proof attendance that prevents proxy marking and works reliably at scale.',
+    solution: 'Built EduFlow, a multi-tenant SaaS with an AI-assisted attendance system that fuses face recognition, liveness detection and keyword-based verification for secure, efficient tracking.',
+    architecture: 'React (Vite + TS) frontend → Laravel REST API (Sanctum) → FastAPI AI service (OpenCV). PostgreSQL for persistence, Redis for caching and queues.',
+    challenges: 'Multi-tenant data isolation, real-time liveness detection latency, orchestrating the AI service pipeline, and keeping Redis and PostgreSQL consistent under load.',
+    features: ['Multi-Tenant', 'Face Recognition', 'Liveness Detection', 'REST API', 'AI Service', 'Role Management'],
+    tech: ['React', 'Laravel', 'FastAPI', 'OpenCV', 'PostgreSQL', 'Redis'],
+    live: 'https://education1-eight.vercel.app/',
+    github: 'https://github.com/HanjalaShihab/EduFlow',
+    complexity: 'High',
+    year: '2026'
+  },
+  {
     id: 1,
     title: 'Adv Platform',
     size: 'featured',
@@ -33,25 +71,6 @@ const projects = [
     github: 'https://github.com/HanjalaShihab/Adv',
     complexity: 'High',
     year: '2024'
-  },
-  {
-    id: 9,
-    title: 'Kanban Flow',
-    size: 'featured',
-    category: ['fullstack', 'web', 'laravel', 'php'],
-    filters: ['Laravel', 'Full Stack', 'Backend'],
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&q=80',
-    description: 'Real-time collaborative Kanban board with instant multi-user sync over WebSockets.',
-    problem: 'Distributed teams needed task boards that stay in sync instantly, without refreshing or polling.',
-    solution: 'Built a real-time Kanban board where card moves, edits and comments broadcast to every open board the moment they happen.',
-    architecture: 'Laravel 11 + Livewire 3 for reactive server-rendered UI, Laravel Reverb for WebSocket broadcasting, MySQL for persistence, policy-based authorization per workspace.',
-    challenges: 'Keeping optimistic drag-and-drop state consistent across concurrent editors, broadcasting granular events without over-fetching, and scoping real-time channels per workspace.',
-    features: ['Real-time Collaboration', 'WebSockets', 'Drag & Drop', 'Role Management', 'Activity Logs', 'Notifications'],
-    tech: ['Laravel', 'Livewire', 'Reverb', 'MySQL', 'Alpine.js'],
-    live: '#',
-    github: '#',
-    complexity: 'High',
-    year: '2026'
   },
   {
     id: 2,
@@ -254,44 +273,6 @@ const DashboardMock = ({ url }) => (
   </div>
 )
 
-const KanbanMock = ({ url }) => (
-  <div className="mockup">
-    <MockBar url={url} />
-    <div className="mockup-body mockup-body--stack">
-      <div className="mockup-toolbar mockup-toolbar--kanban">
-        <span className="mockup-toolbar-title">Kanban Flow</span>
-        <span className="mockup-avatar-stack">
-          <span className="mock-avatar-chip" />
-          <span className="mock-avatar-chip" />
-          <span className="mock-avatar-chip" />
-        </span>
-        <span className="mockup-toolbar-btn mockup-toolbar-btn--accent">Share</span>
-      </div>
-      <div className="mock-kanban-board">
-        {[
-          { title: 'Backlog', count: 4, cards: ['API rate limiting', 'Redis caching layer', 'Webhook retries', 'Schema migration'] },
-          { title: 'In Progress', count: 3, cards: ['Reverb broadcasting', 'JWT refresh flow', 'Optimistic DnD'] },
-          { title: 'Review', count: 2, cards: ['Role policies', 'WS channel scoping'] },
-          { title: 'Done', count: 5, cards: ['Auth scaffold', 'Board CRUD', 'Realtime sync', 'Activity logs', 'Notifications'] }
-        ].map((col) => (
-          <div key={col.title} className="mock-kanban-col">
-            <div className="mock-kanban-col-head">
-              <span>{col.title}</span>
-              <span className="mock-kanban-count">{col.count}</span>
-            </div>
-            {col.cards.slice(0, 3).map((c) => (
-              <div key={c} className="mock-kanban-card">
-                <span className="mock-kanban-tag">ENG</span>
-                <span className="mock-kanban-card-title">{c}</span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-)
-
 const GalleryMock = ({ url }) => (
   <div className="mockup">
     <MockBar url={url} />
@@ -472,6 +453,104 @@ const EcommerceMock = ({ url }) => (
   </div>
 )
 
+/* Adalot Sathi — mobile deadline manager mockup */
+const DeadlineMock = ({ url }) => (
+  <div className="mockup">
+    <MockBar url={url} />
+    <div className="mockup-body mockup-body--stack">
+      <div className="mock-mob-header">
+        <span className="mock-mob-brand">⚖️ Adalot Sathi</span>
+        <span className="mock-mob-avatar" />
+      </div>
+      <div className="mock-deadline-summary">
+        {[
+          { label: 'Active', value: '24' },
+          { label: 'Due Soon', value: '6' },
+          { label: 'Overdue', value: '1' }
+        ].map((s) => (
+          <div key={s.label} className="mock-deadline-stat">
+            <span className="mock-deadline-value">{s.value}</span>
+            <span className="mock-deadline-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mock-deadline-list">
+        {[
+          { case: 'Rahman v. Amin', date: 'Hearing · Jun 12', level: 'urgent' },
+          { case: 'Sultana v. BADC', date: 'Filing · Jun 18', level: 'soon' },
+          { case: 'Karim v. Co.', date: 'Reply · Jul 02', level: 'normal' }
+        ].map((d) => (
+          <div key={d.case} className="mock-deadline-card">
+            <div className="mock-deadline-card-head">
+              <span className="mock-deadline-case">{d.case}</span>
+              <span className={`mock-deadline-badge mock-deadline-badge--${d.level}`}>{d.level}</span>
+            </div>
+            <span className="mock-deadline-meta">{d.date}</span>
+            <div className="mock-deadline-bells">
+              <span className="mock-bell-chip">🔔 Push</span>
+              <span className="mock-bell-chip">✉ SMS</span>
+              <span className="mock-bell-chip mock-bell-chip--off">⏰ +2 day</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)
+
+/* EduFlow — AI attendance dashboard mockup */
+const EduFlowMock = ({ url }) => (
+  <div className="mockup">
+    <MockBar url={url} />
+    <div className="mockup-body mockup-body--split">
+      <div className="mockup-sidebar mockup-sidebar--labeled">
+        <span className="mockup-sidebar-brand">EduFlow</span>
+        <span className="mockup-nav-label is-active">Dashboard</span>
+        <span className="mockup-nav-label">Attendance</span>
+        <span className="mockup-nav-label">Institutions</span>
+        <span className="mockup-nav-label">AI Vision</span>
+      </div>
+      <div className="mockup-main">
+        <div className="mockup-toolbar">
+          <span className="mockup-toolbar-title">Live Attendance</span>
+          <span className="mockup-toolbar-btn mockup-toolbar-btn--accent">● Live</span>
+        </div>
+        <div className="mock-ai-stats">
+          <div className="mock-ai-stat">
+            <span className="mock-ai-stat-value">98.2%</span>
+            <span className="mock-ai-stat-label">Face Match</span>
+          </div>
+          <div className="mock-ai-stat">
+            <span className="mock-ai-stat-value">1.4s</span>
+            <span className="mock-ai-stat-label">Verify Time</span>
+          </div>
+          <div className="mock-ai-stat">
+            <span className="mock-ai-stat-value">312</span>
+            <span className="mock-ai-stat-label">Marked Today</span>
+          </div>
+        </div>
+        <div className="mock-ai-feed">
+          {[
+            { name: 'A. Rahman', idx: '#1942', status: 'Verified', ok: true },
+            { name: 'S. Khan', idx: '#1943', status: 'Liveness ✓', ok: true },
+            { name: 'M. Hossain', idx: '#1944', status: 'Keyword ✓', ok: true },
+            { name: 'F. Akter', idx: '#1945', status: 'Mismatch', ok: false }
+          ].map((r) => (
+            <div key={r.idx} className="mock-ai-row">
+              <span className="mock-ai-avatar" />
+              <div className="mock-ai-row-body">
+                <span className="mock-ai-name">{r.name}</span>
+                <span className="mock-ai-idx">{r.idx}</span>
+              </div>
+              <span className={`mock-ai-status ${r.ok ? 'is-ok' : 'is-fail'}`}>{r.status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
 /* Hotel landing — needs the hotel flag, so it's a component that reads url */
 const HotelMock = ({ url }) => <LandingMock url={url} hotel />
 
@@ -479,8 +558,9 @@ const HotelMock = ({ url }) => <LandingMock url={url} hotel />
 const mockFor = (project) => {
   const url = project.live.replace('https://', '').replace('http://', '')
   const map = {
+    10: DeadlineMock,
+    11: EduFlowMock,
     1: DashboardMock,
-    9: KanbanMock,
     2: GalleryMock,
     3: FeedMock,
     4: PortfolioMock,
