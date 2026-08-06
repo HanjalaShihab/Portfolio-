@@ -122,6 +122,8 @@
 .tc-cmd {
   color: var(--text-primary);
   font-weight: 500;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* Output block */
@@ -131,6 +133,9 @@
   color: var(--text-secondary);
   padding: 8px 0 6px 26px;
   line-height: 1.7;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .tc-output--block {
@@ -526,6 +531,22 @@
   }
   .tc-output-name {
     font-size: 17px;
+  }
+  .tc-social {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    max-width: 100%;
+  }
+  .tc-social-value {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+  .tc-social-cmd {
+    flex-shrink: 0;
+  }
+  .tc-email-value {
+    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 }
 

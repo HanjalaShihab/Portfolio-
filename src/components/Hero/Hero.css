@@ -269,11 +269,13 @@
 .term-cmd {
   color: var(--text-primary);
   word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .term-out {
   color: var(--text-secondary);
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .term-line--dim .term-out {
@@ -405,6 +407,38 @@
   }
   .hero-quick-links {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(38px, 11vw, 48px);
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-badge-row {
+    gap: 12px;
+  }
+  .hero-tech-focus {
+    padding: 6px 12px;
+  }
+  .terminal-body {
+    padding: 15px 16px 17px;
+    min-height: 220px;
+  }
+  .term-line {
+    font-size: 12px;
+  }
+  .hero-stats {
+    gap: 12px;
+  }
+  .hero-stat-value {
+    font-size: 22px;
+  }
+  .hero-stat-label {
+    font-size: 10.5px;
   }
 }
 

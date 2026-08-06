@@ -446,6 +446,10 @@
   .constellation-cluster {
     width: auto;
     max-width: none;
+    /* Override the inline grid-column/row from the 3x3 desktop grid so
+       clusters flow naturally into the 2-column mobile layout. */
+    grid-column: auto !important;
+    grid-row: auto !important;
     align-items: flex-start;
     gap: 12px;
     padding: 18px 0;
@@ -507,6 +511,31 @@
 
   .skill-pop {
     width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .constellation {
+    grid-template-columns: 1fr;
+    padding: 16px 12px;
+  }
+  .constellation-cluster {
+    align-items: flex-start;
+  }
+  .cluster-nodes {
+    justify-content: flex-start;
+  }
+  .skill-node {
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .skill-pop {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(240px, calc(100vw - 40px));
+  }
+  .skill-pop::after {
+    left: 50%;
   }
 }
 
